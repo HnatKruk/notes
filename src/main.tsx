@@ -6,9 +6,9 @@ import { AppProvider } from './router';
 import './components/styles/styles.module.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <AppProvider />
     </Provider>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 );

@@ -1,0 +1,70 @@
+@import '../../../components/styles/variables.scss';
+
+$noteLinkPaddingX: 25px;
+
+.navLink__disabled {
+  pointer-events: none;
+}
+
+.noteLink {
+  cursor: default;
+  padding: 15px $noteLinkPaddingX;
+  border-radius: 10px;
+  color: $text-color-grey;
+  line-height: 20px;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - #{$noteLinkPaddingX} * 2);
+    height: 1px;
+    background-color: $border-color-grey;
+    display: inline-block;
+  }
+
+  &.noteLink__active {
+    background-color: #037aff;
+
+    &::after {
+      content: none;
+    }
+
+    .noteLink_header, .noteLink_subtitle__date, .noteLink_subtitle__text {
+      color: #fff;
+    }
+  }
+
+  .noteLink_header {
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  .noteLink_subtitle__date {
+    text-wrap: nowrap;
+  }
+
+  .noteLink_subtitle {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+    .noteLink_subtitle__date {
+      margin-right: 8px;
+    }
+  }
+
+  .noteLink_header, .noteLink_subtitle__date {
+    color: #000;
+  }
+
+  .noteLink_header, .noteLink_subtitle__text {
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}

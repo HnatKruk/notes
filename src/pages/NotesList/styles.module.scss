@@ -1,0 +1,13 @@
+@import '../../components/styles/variables.scss';
+
+.notesList {
+  height: calc(100vh - #{$header-height});
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 0 0 auto;
+
+  .notesList_listContainer {
+    padding: 10px;
+  }
+}

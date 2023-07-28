@@ -1,0 +1,9 @@
+@import '../../../components/styles/variables.scss';
+
+.noteDate {
+  align-self: center;
+  font-size: 14px;
+  line-height: 20px;
+  color: $text-color-grey;
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+@import '../styles/variables.scss'; 
+
+.resizeBorder {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background-color: $border-color-grey;
+  cursor: ew-resize;
+
+  .resizeBorder__before, .resizeBorder__after {
+    width: 3px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+  }
+
+  .resizeBorder__before {
+    left: -3px;
+  }
+
+  .resizeBorder__after {
+    left: 0px;
+  }
+}

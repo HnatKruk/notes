@@ -1,0 +1,12 @@
+@import '../../components/styles/variables.scss';
+
+.loaderStyles {
+  height: calc(100vh - $header-height);
+}
+
+.noteItem {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}

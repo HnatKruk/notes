@@ -7,7 +7,6 @@ class DataBase {
   };
 
   async initializeDataEndpoint() {
-    localforage.clear()
     try {
       const data = await localforage.getItem(this.rootData);
       if (data) {
