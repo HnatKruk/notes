@@ -4,14 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { deleteActiveNoteRequestAction } from '../../store/actions';
 import { ResizeBorder } from '../../components/ResizeBorder';
 import { RemoveNoteIcon } from '../../components/icons';
-import { HeaderButton } from '../../components/HeaderButton';
 import styles from './styles.module.scss';
 
 export const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const resizeBorderWidth = useSelector((store) => store.interfaceReducer.resizeBorderWidth);
-  const activeNote = useSelector(store => store.notesReducer.activeNote);
+
+  const { resizeBorderWidth, noteItemLoader } = useSelector(store => store.interfaceReducer);
+  const { activeNote } = useSelector(store => store.notesReducer);
+  const isNoteItemLoader = noteItemLoader || !activeNote;
 
   const deleteActiveNote = () => {
     dispatch(deleteActiveNoteRequestAction(activeNote.id));
@@ -25,9 +26,12 @@ export const Header = () => {
         style={{ width: `${resizeBorderWidth}px` }}
       >
         <div className={styles.header_buttonsContainer}>
-          <HeaderButton onClick={deleteActiveNote}>
+          {!isNoteItemLoader && <button
+            className={styles.headerButton}
+            onClick={deleteActiveNote}
+          >
             <RemoveNoteIcon />
-          </HeaderButton>
+          </button>}
         </div>
         <ResizeBorder />
       </div>

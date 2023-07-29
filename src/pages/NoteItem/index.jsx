@@ -11,8 +11,8 @@ export const NoteItem = () => {
   const dispatch = useDispatch();
   const { noteId } = useParams();
 
-  const noteItemLoader = useSelector(store => store.interfaceReducer.noteItemLoader);
-  const activeNote = useSelector(store => store.notesReducer.activeNote);
+  const { noteItemLoader } = useSelector(store => store.interfaceReducer);
+  const { activeNote } = useSelector(store => store.notesReducer);
   const isNoteItemLoader = noteItemLoader || !activeNote;
 
   useEffect(() => {
@@ -26,4 +26,3 @@ export const NoteItem = () => {
     </div>
   );
 };
-

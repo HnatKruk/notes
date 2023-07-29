@@ -5,8 +5,8 @@ import { ResizeBorder } from '../../components/ResizeBorder';
 import styles from './styles.module.scss';
 
 export const NotesList = () => {
-  const notesList = useSelector((store) => store.notesReducer.notesList);
-  const resizeBorderWidth = useSelector((store) => store.interfaceReducer.resizeBorderWidth);
+  const { notesList } = useSelector(store => store.notesReducer);
+  const { resizeBorderWidth } = useSelector(store => store.interfaceReducer);
   const [borderHeight, setBorderHeight] = useState(null);
   const asideRef = useRef(null);
   const ulRef = useRef(null);

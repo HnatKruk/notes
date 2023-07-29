@@ -22,13 +22,21 @@ class DataBase {
   async getActiveNoteEndpoint(activeNoteId) {
     try {
       const data = await localforage.getItem(this.rootData);
-      const activeNote = data.notesInitialState.notesList.find(note => note.routeId === activeNoteId);
-      if (activeNote) {
-        data.notesInitialState.activeNote = activeNote;
+
+      if (!activeNoteId) {
+        data.notesInitialState.activeNote = null;
         const updatedData = await localforage.setItem(this.rootData, data);
-        return updatedData.notesInitialState.activeNote
+        return updatedData.notesInitialState.activeNote;
       } else {
-        throw new Error();
+        const activeNote = data.notesInitialState.notesList.find(note => note.routeId === activeNoteId);
+
+        if (activeNote) {
+          data.notesInitialState.activeNote = activeNote;
+          const updatedData = await localforage.setItem(this.rootData, data);
+          return updatedData.notesInitialState.activeNote;
+        } else {
+          throw new Error();
+        }
       }
     } catch (error) {
       throw error;
