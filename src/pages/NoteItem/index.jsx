@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {  getActiveNoteRequestAction } from '../../store/actions';
+import { getActiveNoteRequestAction } from '../../store/actions';
 import { AppLoader } from '../../components/AppLoader';
 import { NoteTextarea } from './NoteTextarea';
 import { NoteDate } from './NoteDate';
@@ -12,9 +12,8 @@ export const NoteItem = () => {
   const { noteId } = useParams();
 
   const noteItemLoader = useSelector(store => store.interfaceReducer.noteItemLoader);
-  const isActiveNoteLoaded = useSelector(store => store.notesReducer.isActiveNoteLoaded);
   const activeNote = useSelector(store => store.notesReducer.activeNote);
-  const isNoteItemLoader = noteItemLoader || !isActiveNoteLoaded;
+  const isNoteItemLoader = noteItemLoader || !activeNote;
 
   useEffect(() => {
     dispatch(getActiveNoteRequestAction(noteId));

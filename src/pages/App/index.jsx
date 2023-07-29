@@ -3,7 +3,8 @@ import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotesList } from '../NotesList';
 import { initializeDataRequestAction } from '../../store/actions';
-import { AppLoader } from '../../components/AppLoader'
+import { AppLoader } from '../../components/AppLoader';
+import { Header } from '../Header';
 import styles from './styles.module.scss';
 
 export const App = () => {
@@ -18,7 +19,7 @@ export const App = () => {
 
   return isAppLoader ? <AppLoader customStyles={styles.loaderStyles}/> : (
     <div className={styles.app}>
-      {/* <Header /> */}
+      <Header />
       <main className={styles.app_main}>
         <NotesList />
         <Outlet />

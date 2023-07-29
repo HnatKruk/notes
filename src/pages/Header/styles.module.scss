@@ -1,0 +1,19 @@
+@import '../../components/styles/variables.scss'; 
+
+.header {
+  height: $header-height;
+  background-color: #edeeee;
+
+  .header_leftSide {
+    position: relative;
+    height: 100%;
+    padding: 0 10px;
+
+    .header_buttonsContainer {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+    }
+  }
+}

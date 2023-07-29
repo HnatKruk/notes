@@ -12,7 +12,6 @@ import {
 const initialState = {
   ...rootInitialState.notesInitialState,
   isNotesLoaded: false,
-  isActiveNoteLoaded: false,
 };
 
 export const notesReducer = (state = initialState, action) => {
@@ -31,7 +30,6 @@ export const notesReducer = (state = initialState, action) => {
       return {
         ...state,
         activeNote: action.payload,
-        isActiveNoteLoaded: true,
       };
     case GET_ACTIVE_NOTE_FAILURE:
       return { ...state, activeNote: null };
