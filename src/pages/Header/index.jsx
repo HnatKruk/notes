@@ -15,7 +15,7 @@ export const Header = () => {
 
   const deleteActiveNote = () => {
     dispatch(deleteActiveNoteRequestAction(activeNote.id));
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   return (

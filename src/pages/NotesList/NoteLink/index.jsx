@@ -26,7 +26,7 @@ export const NoteLink = ({ note }) => {
   const subtitle = hasLineBreak ? note.text.substring(lineBreakIndex + 1) : '';
 
   return (
-    <NavLink to={note.routeId} className={({ isActive }) => classNames({[styles.navLink__disabled]: isActive})}>
+    <NavLink to={note.routeId} replace={true} className={({ isActive }) => classNames({[styles.navLink__disabled]: isActive})}>
       {({ isActive }) => (
         <article className={classNames(styles.noteLink, {[styles.noteLink__active]: isActive})}>
           <h2 className={styles.noteLink_header}>
