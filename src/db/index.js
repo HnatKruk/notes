@@ -1,4 +1,6 @@
 import localforage from 'localforage';
+import { v4 as uuidv4 } from 'uuid';
+import short from 'short-uuid';
 import  { rootInitialState } from '../shared/initialState';
 
 class DataBase {
@@ -41,9 +43,9 @@ class DataBase {
     } catch (error) {
       throw error;
     }
-  }
+  };
 
-  async editTextActiveEndpoint({ text, dateEdited }) {
+  async editTextActiveNoteEndpoint({ text, dateEdited }) {
     try {
       const data = await localforage.getItem(this.rootData);
       data.notesInitialState.activeNote.text = text;
@@ -52,9 +54,9 @@ class DataBase {
     } catch (error) {
       throw error;
     }
-  }
+  };
 
-  async deleteActiveEndpoint(activeNoteId) {
+  async deleteActiveNoteEndpoint(activeNoteId) {
     try {
       const data = await localforage.getItem(this.rootData);
       data.notesInitialState.activeNote = null;
@@ -65,7 +67,26 @@ class DataBase {
     } catch (error) {
       throw error;
     }
-  }
+  };
+
+  async createActiveNoteEndpoint(dateCreated) {
+    try {
+      const activeNote = {
+        id: uuidv4(),
+        routeId: short.generate(),
+        text: '',
+        dateCreated: dateCreated,
+        dateEdited: dateCreated,
+      };
+
+      const data = await localforage.getItem(this.rootData);
+      data.notesInitialState.activeNote = activeNote;
+      data.notesInitialState.notesList.unshift(activeNote);
+      return await localforage.setItem(this.rootData, data);
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
 export const myDataBase = new DataBase();

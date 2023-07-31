@@ -3,6 +3,8 @@
 .header {
   height: $header-height;
   background-color: #edeeee;
+  display: flex;
+  align-items: center;
 
   .header_leftSide {
     position: relative;
@@ -14,25 +16,30 @@
       display: flex;
       align-items: center;
       justify-content: end;
+    }
+  }
 
-      .headerButton {
-        width: 33px;
-        height: 33px;
-        position: relative;
-        border-radius: 5px;
-        transition: all 0.3s ease;
-      
-        &:hover {
-          background-color: #dddedf;
-        }
-      
-        svg {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-      }
+  .header_rightSide {
+    padding: 0 10px;
+    flex: 1 0 auto;
+  }
+
+  .headerButton {
+    width: 33px;
+    height: 33px;
+    position: relative;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      background-color: #dddedf;
+    }
+  
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }

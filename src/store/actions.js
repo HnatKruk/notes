@@ -12,6 +12,9 @@ import {
   DELETE_ACTIVE_NOTE_REQUEST,
   DELETE_ACTIVE_NOTE_SUCCESS,
   DELETE_ACTIVE_NOTE_FAILURE,
+  CREATE_ACTIVE_NOTE_REQUEST,
+  CREATE_ACTIVE_NOTE_SUCCESS,
+  CREATE_ACTIVE_NOTE_FAILURE,
 } from './actionsTypes';
 
 export const initializeDataRequestAction = () => ({
@@ -78,5 +81,20 @@ export const deleteActiveNoteSuccessAction = (data) => ({
 
 export const deleteActiveNoteFailureAction = (error) => ({
   type: DELETE_ACTIVE_NOTE_FAILURE,
+  payload: error,
+});
+
+export const createActiveNoteRequestAction = (dateCreated) => ({
+  type: CREATE_ACTIVE_NOTE_REQUEST,
+  payload: dateCreated,
+});
+
+export const createActiveNoteSuccessAction = (data) => ({
+  type: CREATE_ACTIVE_NOTE_SUCCESS,
+  payload: data,
+});
+
+export const createActiveNoteFailureAction = (error) => ({
+  type: CREATE_ACTIVE_NOTE_FAILURE,
   payload: error,
 });

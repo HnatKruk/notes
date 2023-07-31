@@ -36,7 +36,7 @@ export const getActiveNoteRequest = (activeNoteId) => {
 };
 
 mock.onGet('/edit-text-active-note').reply(async ({ params: { text } }) => {
-  const response = await myDataBase.editTextActiveEndpoint(text);
+  const response = await myDataBase.editTextActiveNoteEndpoint(text);
   return [ 200, response ];
 });
 
@@ -49,13 +49,26 @@ export const editTextActiveNoteRequest = (text) => {
 };
 
 mock.onGet('/delete-active-note').reply(async ({ params: { activeNoteId } }) => {
-  const response = await myDataBase.deleteActiveEndpoint(activeNoteId);
+  const response = await myDataBase.deleteActiveNoteEndpoint(activeNoteId);
   return [ 200, response ];
 });
 
 export const deleteActiveNoteRequest = (activeNoteId) => {
   try {
     return axios.get('/delete-active-note', { params: { activeNoteId } }).then(response => response.data);
+  } catch (error) {
+    throw error;
+  }
+};
+
+mock.onGet('/create-active-note').reply(async ({ params: { dateCreated } }) => {
+  const response = await myDataBase.createActiveNoteEndpoint(dateCreated);
+  return [ 200, response ];
+});
+
+export const createActiveNoteRequest = (dateCreated) => {
+  try {
+    return axios.get('/create-active-note', { params: { dateCreated } }).then(response => response.data);
   } catch (error) {
     throw error;
   }

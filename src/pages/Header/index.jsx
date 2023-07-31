@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { deleteActiveNoteRequestAction } from '../../store/actions';
+import { createActiveNoteRequestAction, deleteActiveNoteRequestAction } from '../../store/actions';
 import { ResizeBorder } from '../../components/ResizeBorder';
-import { RemoveNoteIcon } from '../../components/icons';
+import { NewNoteIcon, RemoveNoteIcon } from '../../components/icons';
 import styles from './styles.module.scss';
 
 export const Header = () => {
@@ -17,6 +17,10 @@ export const Header = () => {
   const deleteActiveNote = () => {
     dispatch(deleteActiveNoteRequestAction(activeNote.id));
     navigate('/', { replace: true });
+  };
+
+  const createActiveNote = () => {
+    dispatch(createActiveNoteRequestAction(new Date().toISOString()));
   };
 
   return (
@@ -35,7 +39,13 @@ export const Header = () => {
         </div>
         <ResizeBorder />
       </div>
-      <div  className={styles.header_rightSide}>
+      <div className={styles.header_rightSide}>
+        <button
+          className={styles.headerButton}
+          onClick={createActiveNote}
+        >
+          <NewNoteIcon />
+        </button>
       </div>
     </header>
   );

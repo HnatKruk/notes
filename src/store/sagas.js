@@ -1,16 +1,18 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import {
+  CREATE_ACTIVE_NOTE_REQUEST,
   DELETE_ACTIVE_NOTE_REQUEST,
   EDIT_TEXT_ACTIVE_NOTE_REQUEST,
   GET_ACTIVE_NOTE_REQUEST,
-  INITIALIZE_DATA_REQUEST
+  INITIALIZE_DATA_REQUEST,
 } from './actionsTypes';
 
 import {
   getActiveNoteRequest,
   initializeDataRequest,
   editTextActiveNoteRequest,
-  deleteActiveNoteRequest
+  deleteActiveNoteRequest,
+  createActiveNoteRequest,
 } from '../api';
 
 import {
@@ -22,6 +24,8 @@ import {
   editTextActiveNoteFailureAction,
   deleteActiveNoteSuccessAction,
   deleteActiveNoteFailureAction,
+  createActiveNoteSuccessAction,
+  createActiveNoteFailureAction,
 } from './actions';
 
 function* initializeDataSaga() {
@@ -60,9 +64,19 @@ function* deleteActiveNoteSaga(action) {
   }
 };
 
+function* createActiveNoteSaga(action) {
+  try {
+    const data = yield call(createActiveNoteRequest, action.payload);
+    yield put(createActiveNoteSuccessAction(data));
+  } catch (error) {
+    yield put(createActiveNoteFailureAction(error));
+  }
+};
+
 export function* rootSaga() {
   yield takeEvery(INITIALIZE_DATA_REQUEST, initializeDataSaga);
   yield takeEvery(GET_ACTIVE_NOTE_REQUEST, getActiveNoteSaga);
   yield takeEvery(EDIT_TEXT_ACTIVE_NOTE_REQUEST, editTextActiveNoteSaga);
   yield takeEvery(DELETE_ACTIVE_NOTE_REQUEST, deleteActiveNoteSaga);
+  yield takeEvery(CREATE_ACTIVE_NOTE_REQUEST, createActiveNoteSaga);
 };

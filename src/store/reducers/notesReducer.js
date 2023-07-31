@@ -7,6 +7,7 @@ import {
   GET_ACTIVE_NOTE_SUCCESS,
   EDIT_TEXT_ACTIVE_NOTE_SUCCESS,
   DELETE_ACTIVE_NOTE_SUCCESS,
+  CREATE_ACTIVE_NOTE_SUCCESS,
 } from '../actionsTypes';
 
 const initialState = {
@@ -36,6 +37,8 @@ export const notesReducer = (state = initialState, action) => {
     case EDIT_TEXT_ACTIVE_NOTE_SUCCESS:
       return { ...state, ...action.payload.notesInitialState };
     case DELETE_ACTIVE_NOTE_SUCCESS:
+      return { ...state, ...action.payload.notesInitialState };
+    case CREATE_ACTIVE_NOTE_SUCCESS:
       return { ...state, ...action.payload.notesInitialState };
     default:
       return state;
