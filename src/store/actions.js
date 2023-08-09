@@ -69,9 +69,12 @@ export const setResizeBorderWidthAction = (resizeBorderWidth) => ({
   payload: resizeBorderWidth,
 });
 
-export const deleteActiveNoteRequestAction = (activeNoteId) => ({
+export const deleteActiveNoteRequestAction = (activeNoteId, callback) => ({
   type: DELETE_ACTIVE_NOTE_REQUEST,
-  payload: activeNoteId,
+  payload: {
+    activeNoteId,
+    callback,
+  },
 });
 
 export const deleteActiveNoteSuccessAction = (data) => ({

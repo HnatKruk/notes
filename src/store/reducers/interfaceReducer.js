@@ -2,6 +2,9 @@ import {
   CREATE_ACTIVE_NOTE_FAILURE,
   CREATE_ACTIVE_NOTE_REQUEST,
   CREATE_ACTIVE_NOTE_SUCCESS,
+  DELETE_ACTIVE_NOTE_FAILURE,
+  DELETE_ACTIVE_NOTE_REQUEST,
+  DELETE_ACTIVE_NOTE_SUCCESS,
   GET_ACTIVE_NOTE_FAILURE,
   GET_ACTIVE_NOTE_REQUEST,
   GET_ACTIVE_NOTE_SUCCESS,
@@ -31,11 +34,13 @@ export const interfaceReducer = (state = initialState, action) => {
       return { ...state, noteItemLoader: false };
     case SET_RESIZE_BORDER_WIDTH:
       return { ...state, resizeBorderWidth: action.payload };
+    case DELETE_ACTIVE_NOTE_REQUEST: 
+      return { ...state, noteItemLoader: true }
+    case DELETE_ACTIVE_NOTE_SUCCESS:
+    case DELETE_ACTIVE_NOTE_FAILURE:
+      return { ...state, noteItemLoader: false };
     case CREATE_ACTIVE_NOTE_REQUEST:
       return { ...state, noteItemLoader: true };
-    case CREATE_ACTIVE_NOTE_SUCCESS:
-    case CREATE_ACTIVE_NOTE_FAILURE:
-      return { ...state, noteItemLoader: false };
     default:
       return state;
   }

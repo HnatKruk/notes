@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { editTextActiveNoteRequestAction } from '../../../store/actions';
+import { editTextActiveNoteRequestAction } from '../../store/actions';
 import styles from './styles.module.scss';
 
 export const NoteTextarea = ({ text }) => {

@@ -49,6 +49,7 @@ export const editTextActiveNoteRequest = (text) => {
 };
 
 mock.onGet('/delete-active-note').reply(async ({ params: { activeNoteId } }) => {
+  await delayRequest(1000);
   const response = await myDataBase.deleteActiveNoteEndpoint(activeNoteId);
   return [ 200, response ];
 });
@@ -62,6 +63,7 @@ export const deleteActiveNoteRequest = (activeNoteId) => {
 };
 
 mock.onGet('/create-active-note').reply(async ({ params: { dateCreated } }) => {
+  await delayRequest(1000);
   const response = await myDataBase.createActiveNoteEndpoint(dateCreated);
   return [ 200, response ];
 });

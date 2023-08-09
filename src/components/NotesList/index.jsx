@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { NoteLink } from './NoteLink';
-import { ResizeBorder } from '../../components/ResizeBorder';
+import { NoteLink, ResizeBorder } from '..';
 import styles from './styles.module.scss';
 
 export const NotesList = () => {

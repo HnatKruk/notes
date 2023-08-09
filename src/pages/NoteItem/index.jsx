@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getActiveNoteRequestAction } from '../../store/actions';
-import { AppLoader } from '../../components/AppLoader';
-import { NoteTextarea } from './NoteTextarea';
-import { NoteDate } from './NoteDate';
+import { AppLoader, NoteTextarea, NoteDate } from '../../components';
 import styles from './styles.module.scss';
 
 export const NoteItem = () => {
@@ -17,7 +15,7 @@ export const NoteItem = () => {
 
   useEffect(() => {
     dispatch(getActiveNoteRequestAction(noteId));
-  }, [dispatch, noteId]);
+  }, [dispatch, getActiveNoteRequestAction, noteId]);
 
   return isNoteItemLoader ? <AppLoader customStyles={styles.loaderStyles}/> : (
     <div className={styles.noteItem}>

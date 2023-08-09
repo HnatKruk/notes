@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { NotesList } from '../NotesList';
 import { initializeDataRequestAction } from '../../store/actions';
-import { AppLoader } from '../../components/AppLoader';
-import { Header } from '../Header';
+import { NotesList, AppLoader, Header } from '../../components';
 import styles from './styles.module.scss';
 
 export const App = () => {

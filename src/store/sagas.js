@@ -1,4 +1,4 @@
-import { put, takeEvery, call } from 'redux-saga/effects';
+import { put, takeEvery, call, cancel, takeLatest } from 'redux-saga/effects';
 import {
   CREATE_ACTIVE_NOTE_REQUEST,
   DELETE_ACTIVE_NOTE_REQUEST,
@@ -57,10 +57,12 @@ function* editTextActiveNoteSaga(action) {
 
 function* deleteActiveNoteSaga(action) {
   try {
-    const data = yield call(deleteActiveNoteRequest, action.payload);
+    const data = yield call(deleteActiveNoteRequest, action.payload.activeNoteId);
     yield put(deleteActiveNoteSuccessAction(data));
   } catch (error) {
     yield put(deleteActiveNoteFailureAction(error));
+  } finally {
+    action.payload.callback();
   }
 };
 
@@ -75,7 +77,7 @@ function* createActiveNoteSaga(action) {
 
 export function* rootSaga() {
   yield takeEvery(INITIALIZE_DATA_REQUEST, initializeDataSaga);
-  yield takeEvery(GET_ACTIVE_NOTE_REQUEST, getActiveNoteSaga);
+  yield takeLatest(GET_ACTIVE_NOTE_REQUEST, getActiveNoteSaga);
   yield takeEvery(EDIT_TEXT_ACTIVE_NOTE_REQUEST, editTextActiveNoteSaga);
   yield takeEvery(DELETE_ACTIVE_NOTE_REQUEST, deleteActiveNoteSaga);
   yield takeEvery(CREATE_ACTIVE_NOTE_REQUEST, createActiveNoteSaga);
