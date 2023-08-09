@@ -1,16 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editTextActiveNoteRequestAction } from '../../store/actions';
 import styles from './styles.module.scss';
 
-export const NoteTextarea = ({ text }) => {
+interface NoteTextareaProps {
+  text: string;
+};
+
+export const NoteTextarea: FC<NoteTextareaProps> = ({ text }) => {
   const dispatch = useDispatch();
   const [textareaValue, setTextareaValue] = useState(text);
-  const textareaRef = useRef(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setTextareaValue(event.target.value);
-    dispatch(editTextActiveNoteRequestAction(event.target.value, (new Date().toISOString())));
+    const currentDate = new Date().toISOString();
+    dispatch(editTextActiveNoteRequestAction(event.target.value, currentDate));
   };
 
   useEffect(() => {

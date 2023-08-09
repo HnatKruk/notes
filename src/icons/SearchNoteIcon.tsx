@@ -1,6 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
 
-export const SearchNoteIcon = ({ fill, width, height }) => (
+interface SearchNoteIconProps {
+  fill: string;
+  width: string;
+  height: string;
+};
+
+export const SearchNoteIcon: FC<SearchNoteIconProps> = ({ fill, width, height }) => (
   <svg
     width={width}
     height={height}

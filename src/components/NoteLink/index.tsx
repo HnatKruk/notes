@@ -1,11 +1,21 @@
-import React from 'react';
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { format, isToday, isThisWeek, parseISO } from 'date-fns';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
 
-export const NoteLink = ({ note }) => {
-  const formatDate = (date) => {
+interface NoteLinkProps {
+  note: {
+    dateCreated: string;
+    dateEdited: string;
+    id: string;
+    routeId: string;
+    text: string;
+  };
+}
+
+export const NoteLink: FC<NoteLinkProps> = ({ note }) => {
+  const formatDate = (date: string) => {
     const parsedDate = parseISO(date);
 
     if (isToday(parsedDate)) {
@@ -26,7 +36,11 @@ export const NoteLink = ({ note }) => {
   const subtitle = hasLineBreak ? note.text.substring(lineBreakIndex + 1) : '';
 
   return (
-    <NavLink to={note.routeId} replace={true} className={({ isActive }) => classNames({[styles.navLink__disabled]: isActive})}>
+    <NavLink
+      to={note.routeId}
+      replace={true}
+      className={({ isActive }) => classNames({[styles.navLink__disabled]: isActive})}
+    >
       {({ isActive }) => (
         <article className={classNames(styles.noteLink, {[styles.noteLink__active]: isActive})}>
           <h2 className={styles.noteLink_header}>

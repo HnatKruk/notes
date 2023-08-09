@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { FC, useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { NoteLink, ResizeBorder } from '..';
 import styles from './styles.module.scss';
 
-export const NotesList = () => {
-  const { notesList } = useSelector(store => store.notesReducer);
-  const { resizeBorderWidth } = useSelector(store => store.interfaceReducer);
-  const [borderHeight, setBorderHeight] = useState(null);
-  const asideRef = useRef(null);
-  const ulRef = useRef(null);
+interface NotesListProps {};
+
+export const NotesList: FC<NotesListProps> = () => {
+  const { notesList } = useSelector((store: RootState) => store.notesReducer);
+  const { resizeBorderWidth } = useSelector((store: RootState) => store.interfaceReducer);
+  const [borderHeight, setBorderHeight] = useState(0);
+  const asideRef = useRef<HTMLElement | null>(null);
+  const ulRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
     const compareHeights = () => {
@@ -45,3 +47,20 @@ export const NotesList = () => {
     </aside>
   );
 };
+
+interface Note {
+  dateCreated: string;
+  dateEdited: string;
+  id: string;
+  routeId: string;
+  text: string;
+};
+
+interface RootState {
+  interfaceReducer: {
+    resizeBorderWidth: number;
+  };
+  notesReducer: {
+    notesList: Note[];
+  };
+}

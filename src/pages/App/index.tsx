@@ -9,8 +9,8 @@ export const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { appLoader } = useSelector(store => store.interfaceReducer);
-  const { isNotesLoaded, activeNote } = useSelector(store => store.notesReducer);
+  const { appLoader } = useSelector((store: RootState) => store.interfaceReducer);
+  const { isNotesLoaded, activeNote } = useSelector((store: RootState) => store.notesReducer);
   const isAppLoader = appLoader || !isNotesLoaded;
 
   useEffect(() => {
@@ -32,4 +32,22 @@ export const App = () => {
       </main>
     </div>
   );
+};
+
+interface ActiveNote {
+  dateCreated: string;
+  dateEdited: string;
+  id: string;
+  routeId: string;
+  text: string;
+};
+
+interface RootState {
+  interfaceReducer: {
+    appLoader: boolean;
+  };
+  notesReducer: {
+    isNotesLoaded: boolean;
+    activeNote: ActiveNote;
+  };
 };

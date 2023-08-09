@@ -1,6 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
 
-export const RemoveNoteIcon = ({ fill, width, height }) => (
+interface RemoveNoteIconProps {
+  fill: string;
+  width: string;
+  height: string;
+};
+
+export const RemoveNoteIcon: FC<RemoveNoteIconProps> = ({ fill, width, height }) => (
   <svg
     width={width}
     height={height}

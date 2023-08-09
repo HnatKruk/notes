@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setResizeBorderWidthAction } from '../../store/actions';
 import styles from './styles.module.scss';
 
-export const ResizeBorder = ({ borderHeight }) => {
+interface NoteTextareaProps {
+  borderHeight: number | null;
+};
+
+export const ResizeBorder: FC<NoteTextareaProps> = ({ borderHeight }) => {
   const dispatch = useDispatch();
   const [isResizing, setIsResizing] = useState(false);
 
-  const MIN_WIDTH = 200;
-  const MAX_WIDTH = 600;
+  const MIN_WIDTH: number = 200;
+  const MAX_WIDTH: number = 600;
 
   useEffect(() => {
-    const handleMouseMove = (event) => {
+    const handleMouseMove = (event: MouseEvent) => {
       if (isResizing) {
         const newWidth = event.clientX;
         dispatch(setResizeBorderWidthAction(
@@ -31,7 +35,7 @@ export const ResizeBorder = ({ borderHeight }) => {
     };
   }, [isResizing]);
 
-  const handleMouseDown = (event) => {
+  const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = (event) => {
     event.preventDefault();
     setIsResizing(true);
   };
@@ -40,7 +44,7 @@ export const ResizeBorder = ({ borderHeight }) => {
     <div
       className={styles.resizeBorder}
       onMouseDown={handleMouseDown}
-      style={borderHeight && { height: `${borderHeight}px` }}
+      style={{ height: borderHeight !== null ? `${borderHeight}px` : undefined }}
     >
       <div className={styles.resizeBorder__before} />
       <div className={styles.resizeBorder__after} />

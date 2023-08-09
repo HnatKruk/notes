@@ -9,8 +9,8 @@ export const NoteItem = () => {
   const dispatch = useDispatch();
   const { noteId } = useParams();
 
-  const { noteItemLoader } = useSelector(store => store.interfaceReducer);
-  const { activeNote } = useSelector(store => store.notesReducer);
+  const { noteItemLoader } = useSelector((store: RootState) => store.interfaceReducer);
+  const { activeNote } = useSelector((store: RootState) => store.notesReducer);
   const isNoteItemLoader = noteItemLoader || !activeNote;
 
   useEffect(() => {
@@ -23,4 +23,21 @@ export const NoteItem = () => {
       <NoteTextarea text={activeNote.text} />
     </div>
   );
+};
+
+interface ActiveNote {
+  dateCreated: string;
+  dateEdited: string;
+  id: string;
+  routeId: string;
+  text: string;
+};
+
+interface RootState {
+  interfaceReducer: {
+    noteItemLoader: boolean;
+  };
+  notesReducer: {
+    activeNote: ActiveNote;
+  };
 };

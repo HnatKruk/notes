@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createActiveNoteRequestAction, deleteActiveNoteRequestAction } from '../../store/actions';
@@ -6,12 +6,14 @@ import { ResizeBorder } from '..';
 import { NewNoteIcon, RemoveNoteIcon } from '../../icons';
 import styles from './styles.module.scss';
 
-export const Header = () => {
+interface HeaderProps {};
+
+export const Header: FC<HeaderProps> = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { resizeBorderWidth, noteItemLoader } = useSelector(store => store.interfaceReducer);
-  const { activeNote } = useSelector(store => store.notesReducer);
+  const { resizeBorderWidth, noteItemLoader } = useSelector((store: RootState) => store.interfaceReducer);
+  const { activeNote } = useSelector((store: RootState) => store.notesReducer);
   const isNoteItemLoader = noteItemLoader || !activeNote;
 
   const deleteActiveNote = () => {
@@ -54,3 +56,15 @@ export const Header = () => {
     </header>
   );
 };
+
+interface RootState {
+  interfaceReducer: {
+    resizeBorderWidth: number;
+    noteItemLoader: boolean;
+  };
+  notesReducer: {
+    activeNote: {
+      id: string;
+    };
+  };
+}
