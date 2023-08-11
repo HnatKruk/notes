@@ -1,16 +1,17 @@
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { initializeDataRequestAction } from '../../store/actions';
-import { NotesList, AppLoader, Header } from '../../components';
+import { initializeDataRequestAction } from '@actions';
+import { NotesList, AppLoader, Header } from '@components';
+import { InterfaceReducer, NotesReducer } from '@interfaces/store.ts';
 import styles from './styles.module.scss';
 
-export const App = () => {
+export const App: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { appLoader } = useSelector((store: RootState) => store.interfaceReducer);
-  const { isNotesLoaded, activeNote } = useSelector((store: RootState) => store.notesReducer);
+  const { appLoader } = useSelector((store: InterfaceReducer) => store.interfaceReducer);
+  const { isNotesLoaded, activeNote } = useSelector((store: NotesReducer) => store.notesReducer);
   const isAppLoader = appLoader || !isNotesLoaded;
 
   useEffect(() => {
@@ -32,22 +33,4 @@ export const App = () => {
       </main>
     </div>
   );
-};
-
-interface ActiveNote {
-  dateCreated: string;
-  dateEdited: string;
-  id: string;
-  routeId: string;
-  text: string;
-};
-
-interface RootState {
-  interfaceReducer: {
-    appLoader: boolean;
-  };
-  notesReducer: {
-    isNotesLoaded: boolean;
-    activeNote: ActiveNote;
-  };
 };

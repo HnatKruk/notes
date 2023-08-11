@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getActiveNoteRequestAction } from '../../store/actions';
-import { AppLoader, NoteTextarea, NoteDate } from '../../components';
+import { getActiveNoteRequestAction } from '@actions';
+import { AppLoader, NoteTextarea, NoteDate } from '@components';
+import { InterfaceReducer, NotesReducer } from '@interfaces/store.ts';
 import styles from './styles.module.scss';
 
-export const NoteItem = () => {
+export const NoteItem: FC = () => {
   const dispatch = useDispatch();
   const { noteId } = useParams();
 
-  const { noteItemLoader } = useSelector((store: RootState) => store.interfaceReducer);
-  const { activeNote } = useSelector((store: RootState) => store.notesReducer);
+  const { noteItemLoader } = useSelector((store: InterfaceReducer) => store.interfaceReducer);
+  const { activeNote } = useSelector((store: NotesReducer) => store.notesReducer);
   const isNoteItemLoader = noteItemLoader || !activeNote;
 
   useEffect(() => {
@@ -23,21 +24,4 @@ export const NoteItem = () => {
       <NoteTextarea text={activeNote.text} />
     </div>
   );
-};
-
-interface ActiveNote {
-  dateCreated: string;
-  dateEdited: string;
-  id: string;
-  routeId: string;
-  text: string;
-};
-
-interface RootState {
-  interfaceReducer: {
-    noteItemLoader: boolean;
-  };
-  notesReducer: {
-    activeNote: ActiveNote;
-  };
 };

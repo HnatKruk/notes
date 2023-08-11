@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setResizeBorderWidthAction } from '../../store/actions';
+import { setResizeBorderWidthAction } from '@actions';
 import styles from './styles.module.scss';
 
 interface NoteTextareaProps {

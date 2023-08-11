@@ -1,4 +1,12 @@
-import { put, takeEvery, call, cancel, takeLatest } from 'redux-saga/effects';
+import {
+  put,
+  takeEvery,
+  call,
+  all,
+  fork,
+  cancel,
+} from 'redux-saga/effects';
+
 import {
   CREATE_ACTIVE_NOTE_REQUEST,
   DELETE_ACTIVE_NOTE_REQUEST,
@@ -26,7 +34,7 @@ import {
   deleteActiveNoteFailureAction,
   createActiveNoteSuccessAction,
   createActiveNoteFailureAction,
-} from './actions';
+} from '@actions';
 
 function* initializeDataSaga() {
   try {
@@ -75,10 +83,31 @@ function* createActiveNoteSaga(action) {
   }
 };
 
+function* watchActiveNoteRequests() {
+  let currentTask;
+
+  yield takeEvery(GET_ACTIVE_NOTE_REQUEST, function* (action) {
+    if (currentTask) {
+      yield cancel(currentTask);
+    }
+
+    currentTask = yield fork(getActiveNoteSaga, action);
+  });
+
+  yield takeEvery(CREATE_ACTIVE_NOTE_REQUEST, function* (action) {
+    if (currentTask) {
+      yield cancel(currentTask);
+    }
+
+    currentTask = yield fork(createActiveNoteSaga, action);
+  });
+};
+
 export function* rootSaga() {
-  yield takeEvery(INITIALIZE_DATA_REQUEST, initializeDataSaga);
-  yield takeLatest(GET_ACTIVE_NOTE_REQUEST, getActiveNoteSaga);
-  yield takeEvery(EDIT_TEXT_ACTIVE_NOTE_REQUEST, editTextActiveNoteSaga);
-  yield takeEvery(DELETE_ACTIVE_NOTE_REQUEST, deleteActiveNoteSaga);
-  yield takeEvery(CREATE_ACTIVE_NOTE_REQUEST, createActiveNoteSaga);
+  yield all([
+    takeEvery(INITIALIZE_DATA_REQUEST, initializeDataSaga),
+    takeEvery(EDIT_TEXT_ACTIVE_NOTE_REQUEST, editTextActiveNoteSaga),
+    takeEvery(DELETE_ACTIVE_NOTE_REQUEST, deleteActiveNoteSaga),
+    fork(watchActiveNoteRequests),
+  ]);
 };

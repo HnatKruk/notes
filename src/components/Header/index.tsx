@@ -1,19 +1,18 @@
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createActiveNoteRequestAction, deleteActiveNoteRequestAction } from '../../store/actions';
-import { ResizeBorder } from '..';
-import { NewNoteIcon, RemoveNoteIcon } from '../../icons';
+import { createActiveNoteRequestAction, deleteActiveNoteRequestAction } from '@actions';
+import { ResizeBorder } from '@components';
+import { NewNoteIcon, RemoveNoteIcon } from '@icons';
+import { InterfaceReducer, NotesReducer } from '@interfaces/store.ts';
 import styles from './styles.module.scss';
 
-interface HeaderProps {};
-
-export const Header: FC<HeaderProps> = () => {
+export const Header: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { resizeBorderWidth, noteItemLoader } = useSelector((store: RootState) => store.interfaceReducer);
-  const { activeNote } = useSelector((store: RootState) => store.notesReducer);
+  const { resizeBorderWidth, noteItemLoader } = useSelector((store: InterfaceReducer) => store.interfaceReducer);
+  const { activeNote } = useSelector((store: NotesReducer) => store.notesReducer);
   const isNoteItemLoader = noteItemLoader || !activeNote;
 
   const deleteActiveNote = () => {
@@ -22,7 +21,8 @@ export const Header: FC<HeaderProps> = () => {
   };
 
   const createActiveNote = () => {
-    dispatch(createActiveNoteRequestAction(new Date().toISOString()));
+    const currentDate = new Date().toISOString();
+    dispatch(createActiveNoteRequestAction(currentDate));
   };
 
   const buttons = [
@@ -56,15 +56,3 @@ export const Header: FC<HeaderProps> = () => {
     </header>
   );
 };
-
-interface RootState {
-  interfaceReducer: {
-    resizeBorderWidth: number;
-    noteItemLoader: boolean;
-  };
-  notesReducer: {
-    activeNote: {
-      id: string;
-    };
-  };
-}

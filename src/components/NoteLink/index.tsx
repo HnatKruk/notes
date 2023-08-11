@@ -1,17 +1,12 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { format, isToday, isThisWeek, parseISO } from 'date-fns';
-import classNames from 'classnames';
+import cx from 'classnames';
+import { Note } from '@interfaces/store.ts';
 import styles from './styles.module.scss';
 
 interface NoteLinkProps {
-  note: {
-    dateCreated: string;
-    dateEdited: string;
-    id: string;
-    routeId: string;
-    text: string;
-  };
+  note: Note;
 }
 
 export const NoteLink: FC<NoteLinkProps> = ({ note }) => {
@@ -39,10 +34,10 @@ export const NoteLink: FC<NoteLinkProps> = ({ note }) => {
     <NavLink
       to={note.routeId}
       replace={true}
-      className={({ isActive }) => classNames({[styles.navLink__disabled]: isActive})}
+      className={({ isActive }) => cx({[styles.navLink__disabled]: isActive})}
     >
       {({ isActive }) => (
-        <article className={classNames(styles.noteLink, {[styles.noteLink__active]: isActive})}>
+        <article className={cx(styles.noteLink, {[styles.noteLink__active]: isActive})}>
           <h2 className={styles.noteLink_header}>
             {title || titlePlaceholder}
           </h2>

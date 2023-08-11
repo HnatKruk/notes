@@ -1,13 +1,12 @@
 import { FC, useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { NoteLink, ResizeBorder } from '..';
+import { NoteLink, ResizeBorder } from '@components';
+import { Note, InterfaceReducer, NotesReducer } from '@interfaces/store.ts';
 import styles from './styles.module.scss';
 
-interface NotesListProps {};
-
-export const NotesList: FC<NotesListProps> = () => {
-  const { notesList } = useSelector((store: RootState) => store.notesReducer);
-  const { resizeBorderWidth } = useSelector((store: RootState) => store.interfaceReducer);
+export const NotesList: FC = () => {
+  const { notesList } = useSelector((store: NotesReducer) => store.notesReducer);
+  const { resizeBorderWidth } = useSelector((store: InterfaceReducer) => store.interfaceReducer);
   const [borderHeight, setBorderHeight] = useState(0);
   const asideRef = useRef<HTMLElement | null>(null);
   const ulRef = useRef<HTMLUListElement | null>(null);
@@ -38,7 +37,7 @@ export const NotesList: FC<NotesListProps> = () => {
     >
       <nav>
         <ul className={styles.notesList_listContainer} ref={ulRef}>
-          {notesList.map((note) => <li key={note.id}>
+          {notesList.map((note: Note) => <li key={note.id}>
             <NoteLink note={note}/>
           </li>)}
         </ul>
@@ -47,20 +46,3 @@ export const NotesList: FC<NotesListProps> = () => {
     </aside>
   );
 };
-
-interface Note {
-  dateCreated: string;
-  dateEdited: string;
-  id: string;
-  routeId: string;
-  text: string;
-};
-
-interface RootState {
-  interfaceReducer: {
-    resizeBorderWidth: number;
-  };
-  notesReducer: {
-    notesList: Note[];
-  };
-}
