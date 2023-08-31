@@ -21,13 +21,14 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Aliases */
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@icons/*": ["src/icons/*"],
-      "@actions": ["src/store/actions.js"],
-      "@interfaces": ["src/interfaces/*"],
+      "@/*": ["*"],
+      "@components": ["components/index.ts"],
+      "@icons": ["icons/index.ts"],
+      "@actions": ["store/actions.ts"],
+      "@actionTypes": ["store/actionTypes.ts"],
+      "@interfaces/*": ["interfaces/*"],
     },
   },
   "include": ["src"],

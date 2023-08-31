@@ -4,7 +4,7 @@ import { setResizeBorderWidthAction } from '@actions';
 import styles from './styles.module.scss';
 
 interface NoteTextareaProps {
-  borderHeight: number | null;
+  borderHeight?: number | null;
 };
 
 export const ResizeBorder: FC<NoteTextareaProps> = ({ borderHeight }) => {

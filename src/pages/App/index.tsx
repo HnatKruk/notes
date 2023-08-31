@@ -3,15 +3,15 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeDataRequestAction } from '@actions';
 import { NotesList, AppLoader, Header } from '@components';
-import { InterfaceReducer, NotesReducer } from '@interfaces/store.ts';
+import { Store } from '@interfaces/store.ts';
 import styles from './styles.module.scss';
 
 export const App: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { appLoader } = useSelector((store: InterfaceReducer) => store.interfaceReducer);
-  const { isNotesLoaded, activeNote } = useSelector((store: NotesReducer) => store.notesReducer);
+  const { appLoader } = useSelector((store: Store) => store.interfaceReducer);
+  const { isNotesLoaded, activeNote } = useSelector((store: Store) => store.notesReducer);
   const isAppLoader = appLoader || !isNotesLoaded;
 
   useEffect(() => {

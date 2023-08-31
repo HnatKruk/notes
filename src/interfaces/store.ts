@@ -17,3 +17,8 @@ export interface NotesReducer {
   activeNote: Note | null,
   notesList: Note[],
 };
+
+export interface Store {
+  interfaceReducer: InterfaceReducer,
+  notesReducer: NotesReducer,
+}

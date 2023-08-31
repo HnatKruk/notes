@@ -12,11 +12,12 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@icons': path.resolve(__dirname, './src/icons'),
-      '@actions': path.resolve(__dirname, './src/store/actions.js'),
-      '@interfaces': path.resolve(__dirname, './src/interfaces'),
+      '@': '/src',
+      '@components': '/src/components/index.ts',
+      '@icons': '/src/icons/index.ts',
+      '@actions': '/src/store/actions.ts',
+      '@actionTypes': '/src/store/actionTypes.ts',
+      '@interfaces': '/src/interfaces',
     },
   },
 });

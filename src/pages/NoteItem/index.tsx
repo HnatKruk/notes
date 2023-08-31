@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getActiveNoteRequestAction } from '@actions';
 import { AppLoader, NoteTextarea, NoteDate } from '@components';
-import { InterfaceReducer, NotesReducer } from '@interfaces/store.ts';
+import { Store } from '@interfaces/store.ts';
 import styles from './styles.module.scss';
 
 export const NoteItem: FC = () => {
   const dispatch = useDispatch();
   const { noteId } = useParams();
 
-  const { noteItemLoader } = useSelector((store: InterfaceReducer) => store.interfaceReducer);
-  const { activeNote } = useSelector((store: NotesReducer) => store.notesReducer);
+  const { noteItemLoader } = useSelector((store: Store) => store.interfaceReducer);
+  const { activeNote } = useSelector((store: Store) => store.notesReducer);
   const isNoteItemLoader = noteItemLoader || !activeNote;
 
   useEffect(() => {

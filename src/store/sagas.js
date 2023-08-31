@@ -7,13 +7,7 @@ import {
   cancel,
 } from 'redux-saga/effects';
 
-import {
-  CREATE_ACTIVE_NOTE_REQUEST,
-  DELETE_ACTIVE_NOTE_REQUEST,
-  EDIT_TEXT_ACTIVE_NOTE_REQUEST,
-  GET_ACTIVE_NOTE_REQUEST,
-  INITIALIZE_DATA_REQUEST,
-} from './actionsTypes';
+import { ActionTypes } from '@actionTypes';
 
 import {
   getActiveNoteRequest,
@@ -86,7 +80,7 @@ function* createActiveNoteSaga(action) {
 function* watchActiveNoteRequests() {
   let currentTask;
 
-  yield takeEvery(GET_ACTIVE_NOTE_REQUEST, function* (action) {
+  yield takeEvery(ActionTypes.GET_ACTIVE_NOTE_REQUEST, function* (action) {
     if (currentTask) {
       yield cancel(currentTask);
     }
@@ -94,7 +88,7 @@ function* watchActiveNoteRequests() {
     currentTask = yield fork(getActiveNoteSaga, action);
   });
 
-  yield takeEvery(CREATE_ACTIVE_NOTE_REQUEST, function* (action) {
+  yield takeEvery(ActionTypes.CREATE_ACTIVE_NOTE_REQUEST, function* (action) {
     if (currentTask) {
       yield cancel(currentTask);
     }
@@ -105,9 +99,9 @@ function* watchActiveNoteRequests() {
 
 export function* rootSaga() {
   yield all([
-    takeEvery(INITIALIZE_DATA_REQUEST, initializeDataSaga),
-    takeEvery(EDIT_TEXT_ACTIVE_NOTE_REQUEST, editTextActiveNoteSaga),
-    takeEvery(DELETE_ACTIVE_NOTE_REQUEST, deleteActiveNoteSaga),
+    takeEvery(ActionTypes.INITIALIZE_DATA_REQUEST, initializeDataSaga),
+    takeEvery(ActionTypes.EDIT_TEXT_ACTIVE_NOTE_REQUEST, editTextActiveNoteSaga),
+    takeEvery(ActionTypes.DELETE_ACTIVE_NOTE_REQUEST, deleteActiveNoteSaga),
     fork(watchActiveNoteRequests),
   ]);
 };

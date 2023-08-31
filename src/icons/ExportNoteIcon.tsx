@@ -1,12 +1,7 @@
 import { FC } from 'react';
+import { Icon } from '@interfaces/icons';
 
-interface ExportNoteIconProps {
-  fill: string;
-  width: string;
-  height: string;
-};
-
-export const ExportNoteIcon: FC<ExportNoteIconProps> = ({ fill, width, height }) => (
+export const ExportNoteIcon: FC<Icon> = ({ fill, width, height }) => (
   <svg
     width={width}
     height={height}

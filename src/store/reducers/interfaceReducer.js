@@ -1,18 +1,4 @@
-import {
-  CREATE_ACTIVE_NOTE_FAILURE,
-  CREATE_ACTIVE_NOTE_REQUEST,
-  CREATE_ACTIVE_NOTE_SUCCESS,
-  DELETE_ACTIVE_NOTE_FAILURE,
-  DELETE_ACTIVE_NOTE_REQUEST,
-  DELETE_ACTIVE_NOTE_SUCCESS,
-  GET_ACTIVE_NOTE_FAILURE,
-  GET_ACTIVE_NOTE_REQUEST,
-  GET_ACTIVE_NOTE_SUCCESS,
-  INITIALIZE_DATA_FAILURE,
-  INITIALIZE_DATA_REQUEST,
-  INITIALIZE_DATA_SUCCESS,
-  SET_RESIZE_BORDER_WIDTH,
-} from '../actionsTypes';
+import { ActionTypes } from '@actionTypes';
 
 const initialState = {
   appLoader: false,
@@ -22,24 +8,24 @@ const initialState = {
 
 export const interfaceReducer = (state = initialState, action) => {
   switch (action.type) {
-    case INITIALIZE_DATA_REQUEST:
+    case ActionTypes.INITIALIZE_DATA_REQUEST:
       return { ...state, appLoader: true };
-    case INITIALIZE_DATA_SUCCESS:
-    case INITIALIZE_DATA_FAILURE:
+    case ActionTypes.INITIALIZE_DATA_SUCCESS:
+    case ActionTypes.INITIALIZE_DATA_FAILURE:
       return { ...state, appLoader: false };
-    case GET_ACTIVE_NOTE_REQUEST:
+    case ActionTypes.GET_ACTIVE_NOTE_REQUEST:
       return { ...state, noteItemLoader: true };
-    case GET_ACTIVE_NOTE_SUCCESS:
-    case GET_ACTIVE_NOTE_FAILURE:
+    case ActionTypes.GET_ACTIVE_NOTE_SUCCESS:
+    case ActionTypes.GET_ACTIVE_NOTE_FAILURE:
       return { ...state, noteItemLoader: false };
-    case SET_RESIZE_BORDER_WIDTH:
+    case ActionTypes.SET_RESIZE_BORDER_WIDTH:
       return { ...state, resizeBorderWidth: action.payload };
-    case DELETE_ACTIVE_NOTE_REQUEST: 
+    case ActionTypes.DELETE_ACTIVE_NOTE_REQUEST: 
       return { ...state, noteItemLoader: true }
-    case DELETE_ACTIVE_NOTE_SUCCESS:
-    case DELETE_ACTIVE_NOTE_FAILURE:
+    case ActionTypes.DELETE_ACTIVE_NOTE_SUCCESS:
+    case ActionTypes.DELETE_ACTIVE_NOTE_FAILURE:
       return { ...state, noteItemLoader: false };
-    case CREATE_ACTIVE_NOTE_REQUEST:
+    case ActionTypes.CREATE_ACTIVE_NOTE_REQUEST:
       return { ...state, noteItemLoader: true };
     default:
       return state;

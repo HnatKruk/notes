@@ -1,12 +1,12 @@
 import { FC, useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { NoteLink, ResizeBorder } from '@components';
-import { Note, InterfaceReducer, NotesReducer } from '@interfaces/store.ts';
+import { Note, Store } from '@interfaces/store.ts';
 import styles from './styles.module.scss';
 
 export const NotesList: FC = () => {
-  const { notesList } = useSelector((store: NotesReducer) => store.notesReducer);
-  const { resizeBorderWidth } = useSelector((store: InterfaceReducer) => store.interfaceReducer);
+  const { notesList } = useSelector((store: Store) => store.notesReducer);
+  const { resizeBorderWidth } = useSelector((store: Store) => store.interfaceReducer);
   const [borderHeight, setBorderHeight] = useState(0);
   const asideRef = useRef<HTMLElement | null>(null);
   const ulRef = useRef<HTMLUListElement | null>(null);
