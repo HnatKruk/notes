@@ -3,19 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getActiveNoteRequestAction } from '@actions';
 import { AppLoader, NoteTextarea, NoteDate } from '@components';
-import { Store } from '@interfaces/store.ts';
+import { RootStateInterface } from '@interfaces';
 import styles from './styles.module.scss';
 
 export const NoteItem: FC = () => {
   const dispatch = useDispatch();
   const { noteId } = useParams();
 
-  const { noteItemLoader } = useSelector((store: Store) => store.interfaceReducer);
-  const { activeNote } = useSelector((store: Store) => store.notesReducer);
+  const { noteItemLoader } = useSelector((store: RootStateInterface) => store.viewReducer);
+  const { activeNote } = useSelector((store: RootStateInterface) => store.notesReducer);
   const isNoteItemLoader = noteItemLoader || !activeNote;
 
   useEffect(() => {
-    dispatch(getActiveNoteRequestAction(noteId));
+    dispatch(getActiveNoteRequestAction(noteId as string));
   }, [dispatch, getActiveNoteRequestAction, noteId]);
 
   return isNoteItemLoader ? <AppLoader customStyles={styles.loaderStyles}/> : (

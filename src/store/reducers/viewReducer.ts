@@ -1,12 +1,13 @@
 import { ActionTypes } from '@actionTypes';
+import { viewReducerInterface, InterfaceActions } from '@interfaces';
 
-const initialState = {
+const initialState: viewReducerInterface = {
   appLoader: false,
   noteItemLoader: false,
   resizeBorderWidth: 300,
 };
 
-export const interfaceReducer = (state = initialState, action) => {
+export const viewReducer = (state = initialState, action: InterfaceActions) => {
   switch (action.type) {
     case ActionTypes.INITIALIZE_DATA_REQUEST:
       return { ...state, appLoader: true };

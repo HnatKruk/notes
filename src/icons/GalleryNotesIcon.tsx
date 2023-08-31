@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Icon } from '@interfaces/icons';
+import { IconInterface } from '@interfaces';
 
-export const GalleryNotesIcon: FC<Icon> = ({ fill, width, height }) => (
+export const GalleryNotesIcon: FC<IconInterface> = ({ fill, width, height }) => (
   <svg
     fill={fill}
     width={width}

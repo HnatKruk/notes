@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { format, isToday, isThisWeek, parseISO } from 'date-fns';
 import cx from 'classnames';
-import { Note } from '@interfaces/store.ts';
+import { NoteInterface } from '@interfaces';
 import styles from './styles.module.scss';
 
 interface NoteLinkProps {
-  note: Note;
+  note: NoteInterface;
 }
 
 export const NoteLink: FC<NoteLinkProps> = ({ note }) => {

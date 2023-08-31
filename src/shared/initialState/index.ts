@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import short from 'short-uuid';
+import { InitialStateInterface } from '@interfaces';
 
-export const rootInitialState = {
+export const rootInitialState: InitialStateInterface = {
   notesInitialState: {
     activeNote: null,
     notesList: [

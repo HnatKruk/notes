@@ -1,10 +1,10 @@
-export interface InterfaceReducer {
+export interface viewReducerInterface {
   appLoader: boolean,
   noteItemLoader: boolean,
   resizeBorderWidth: number,
 };
 
-export interface Note {
+export interface NoteInterface {
   id: string,
   routeId: string,
   text: string,
@@ -12,13 +12,13 @@ export interface Note {
   dateEdited: string,
 };
 
-export interface NotesReducer {
+export interface NotesReducerInterface {
   isNotesLoaded: boolean,
-  activeNote: Note | null,
-  notesList: Note[],
+  activeNote: NoteInterface | null,
+  notesList: NoteInterface[],
 };
 
-export interface Store {
-  interfaceReducer: InterfaceReducer,
-  notesReducer: NotesReducer,
-}
+export interface RootStateInterface {
+  viewReducer: viewReducerInterface,
+  notesReducer: NotesReducerInterface,
+};

@@ -1,6 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { App } from '../pages/App';
-import { NoteItem } from '../pages/NoteItem';
+import { App, NoteItem } from '../pages';
 
 export const AppProvider = () => {
   const router = createBrowserRouter([

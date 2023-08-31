@@ -28,7 +28,7 @@
       "@icons": ["icons/index.ts"],
       "@actions": ["store/actions.ts"],
       "@actionTypes": ["store/actionTypes.ts"],
-      "@interfaces/*": ["interfaces/*"],
+      "@interfaces": ["interfaces/index.ts"],
     },
   },
   "include": ["src"],

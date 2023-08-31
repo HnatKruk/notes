@@ -1,13 +1,14 @@
-import {
-  put,
-  takeEvery,
-  call,
-  all,
-  fork,
-  cancel,
-} from 'redux-saga/effects';
-
+import * as Effects from "redux-saga/effects";
+import { Task } from 'redux-saga';
 import { ActionTypes } from '@actionTypes';
+
+import {
+  NotesReducerInterface,
+  GetActiveNoteRequestInterface,
+  EditTextActiveNoteRequestInterface,
+  DeleteActiveNoteRequestInterface,
+  CreateActiveNoteRequestInterface,
+} from '@/interfaces';
 
 import {
   getActiveNoteRequest,
@@ -30,36 +31,47 @@ import {
   createActiveNoteFailureAction,
 } from '@actions';
 
+const call: any = Effects.call;
+const fork: any = Effects.fork;
+const put: any = Effects.put;
+const takeEvery: any = Effects.takeEvery;
+const all: any = Effects.all;
+const cancel: any = Effects.cancel;
+
+interface ReturnedData {
+  notesInitialState: NotesReducerInterface,
+};
+
 function* initializeDataSaga() {
   try {
-    const data = yield call(initializeDataRequest);
+    const data: ReturnedData = yield call(initializeDataRequest);
     yield put(initializeDataSuccessAction(data));
   } catch (error) {
     yield put(initializeDataFailureAction(error));
   }
 };
 
-function* getActiveNoteSaga(action) {
+function* getActiveNoteSaga(action: GetActiveNoteRequestInterface) {
   try {
-    const data = yield call(getActiveNoteRequest, action.payload);
+    const data: NotesReducerInterface = yield call(getActiveNoteRequest, action.payload);
     yield put(getActiveNoteSuccessAction(data));
   } catch (error) {
     yield put(getActiveNoteFailureAction(error));
   }
 };
 
-function* editTextActiveNoteSaga(action) {
+function* editTextActiveNoteSaga(action: EditTextActiveNoteRequestInterface) {
   try {
-    const data = yield call(editTextActiveNoteRequest, action.payload);
+    const data: ReturnedData = yield call(editTextActiveNoteRequest, action.payload);
     yield put(editTextActiveNoteSuccessAction(data));
   } catch (error) {
     yield put(editTextActiveNoteFailureAction(error));
   }
 };
 
-function* deleteActiveNoteSaga(action) {
+function* deleteActiveNoteSaga(action: DeleteActiveNoteRequestInterface) {
   try {
-    const data = yield call(deleteActiveNoteRequest, action.payload.activeNoteId);
+    const data: ReturnedData = yield call(deleteActiveNoteRequest, action.payload.activeNoteId);
     yield put(deleteActiveNoteSuccessAction(data));
   } catch (error) {
     yield put(deleteActiveNoteFailureAction(error));
@@ -68,9 +80,9 @@ function* deleteActiveNoteSaga(action) {
   }
 };
 
-function* createActiveNoteSaga(action) {
+function* createActiveNoteSaga(action: CreateActiveNoteRequestInterface) {
   try {
-    const data = yield call(createActiveNoteRequest, action.payload);
+    const data: ReturnedData = yield call(createActiveNoteRequest, action.payload);
     yield put(createActiveNoteSuccessAction(data));
   } catch (error) {
     yield put(createActiveNoteFailureAction(error));
@@ -78,9 +90,9 @@ function* createActiveNoteSaga(action) {
 };
 
 function* watchActiveNoteRequests() {
-  let currentTask;
+  let currentTask: Task<any>;
 
-  yield takeEvery(ActionTypes.GET_ACTIVE_NOTE_REQUEST, function* (action) {
+  yield takeEvery(ActionTypes.GET_ACTIVE_NOTE_REQUEST, function* (action: GetActiveNoteRequestInterface) {
     if (currentTask) {
       yield cancel(currentTask);
     }
@@ -88,7 +100,7 @@ function* watchActiveNoteRequests() {
     currentTask = yield fork(getActiveNoteSaga, action);
   });
 
-  yield takeEvery(ActionTypes.CREATE_ACTIVE_NOTE_REQUEST, function* (action) {
+  yield takeEvery(ActionTypes.CREATE_ACTIVE_NOTE_REQUEST, function* (action: CreateActiveNoteRequestInterface) {
     if (currentTask) {
       yield cancel(currentTask);
     }

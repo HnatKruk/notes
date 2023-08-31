@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { myDataBase } from '../db';
 
 const mock = new MockAdapter(axios);
-const delayRequest = async (ms) => {
+const delayRequest = async (ms: number) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
@@ -27,7 +27,7 @@ mock.onGet('/get-active-note').reply(async ({ params: { activeNoteId } }) => {
   return [ 200, response ];
 });
 
-export const getActiveNoteRequest = (activeNoteId) => {
+export const getActiveNoteRequest = (activeNoteId: string) => {
   try {
     return axios.get('/get-active-note', { params: { activeNoteId } }).then(response => response.data);
   } catch (error) {
@@ -40,9 +40,10 @@ mock.onGet('/edit-text-active-note').reply(async ({ params: { text } }) => {
   return [ 200, response ];
 });
 
-export const editTextActiveNoteRequest = (text) => {
+export const editTextActiveNoteRequest = async (text: string) => {
   try {
-    return axios.get('/edit-text-active-note', { params: { text } }).then(response => response.data);
+    const response = await axios.get('/edit-text-active-note', { params: { text } })
+    return response.data;
   } catch (error) {
     throw error;
   }
@@ -54,7 +55,7 @@ mock.onGet('/delete-active-note').reply(async ({ params: { activeNoteId } }) => 
   return [ 200, response ];
 });
 
-export const deleteActiveNoteRequest = (activeNoteId) => {
+export const deleteActiveNoteRequest = (activeNoteId: string) => {
   try {
     return axios.get('/delete-active-note', { params: { activeNoteId } }).then(response => response.data);
   } catch (error) {
@@ -68,7 +69,7 @@ mock.onGet('/create-active-note').reply(async ({ params: { dateCreated } }) => {
   return [ 200, response ];
 });
 
-export const createActiveNoteRequest = (dateCreated) => {
+export const createActiveNoteRequest = (dateCreated: string) => {
   try {
     return axios.get('/create-active-note', { params: { dateCreated } }).then(response => response.data);
   } catch (error) {

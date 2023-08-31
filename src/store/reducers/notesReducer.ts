@@ -1,12 +1,13 @@
 import { rootInitialState } from '../../shared/initialState';
 import { ActionTypes } from '@actionTypes';
+import { NotesReducer, InterfaceActions } from '@interfaces';
 
-const initialState = {
+const initialState: NotesReducer = {
   ...rootInitialState.notesInitialState,
   isNotesLoaded: false,
 };
 
-export const notesReducer = (state = initialState, action) => {
+export const notesReducer = (state = initialState, action: InterfaceActions) => {
   switch (action.type) {
     case ActionTypes.INITIALIZE_DATA_REQUEST:
       return { ...state, activeNote: null };

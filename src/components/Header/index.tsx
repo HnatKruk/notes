@@ -4,30 +4,26 @@ import { useNavigate } from 'react-router-dom';
 import { createActiveNoteRequestAction, deleteActiveNoteRequestAction } from '@actions';
 import { ResizeBorder } from '@components';
 import { NewNoteIcon, RemoveNoteIcon } from '@icons';
-import { Store } from '@interfaces/store.ts';
+import { RootStateInterface } from '@interfaces';
 import styles from './styles.module.scss';
 
 export const Header: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { resizeBorderWidth, noteItemLoader } = useSelector((store: Store) => store.interfaceReducer);
-  const { activeNote } = useSelector((store: Store) => store.notesReducer);
+  const { resizeBorderWidth, noteItemLoader } = useSelector((store: RootStateInterface) => store.viewReducer);
+  const { activeNote } = useSelector((store: RootStateInterface) => store.notesReducer);
   const isNoteItemLoader = noteItemLoader || !activeNote;
 
   const deleteActiveNote = () => {
     const handleNavigate = () => {navigate('/', { replace: true })};
-    dispatch(deleteActiveNoteRequestAction(activeNote?.id, handleNavigate));
+    dispatch(deleteActiveNoteRequestAction(activeNote?.id as string, handleNavigate));
   };
 
   const createActiveNote = () => {
     const currentDate = new Date().toISOString();
     dispatch(createActiveNoteRequestAction(currentDate));
   };
-
-  const buttons = [
-    { icon: RemoveNoteIcon, handleClick: deleteActiveNote },
-  ]
 
   return (
     <header className={styles.header}>

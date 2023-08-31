@@ -17,7 +17,7 @@ export default defineConfig({
       '@icons': '/src/icons/index.ts',
       '@actions': '/src/store/actions.ts',
       '@actionTypes': '/src/store/actionTypes.ts',
-      '@interfaces': '/src/interfaces',
+      '@interfaces': '/src/interfaces/index.ts',
     },
   },
 });
