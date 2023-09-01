@@ -31,6 +31,6 @@
       "@interfaces": ["interfaces/index.ts"],
     },
   },
-  "include": ["vite.config.ts", ".eslintrc.cjs", "src"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
