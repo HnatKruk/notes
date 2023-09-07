@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -17,6 +17,16 @@ export default defineConfig({
       '@actions': '/src/store/actions.ts',
       '@actionTypes': '/src/store/actionTypes.ts',
       '@interfaces': '/src/interfaces/index.ts',
+    },
+  },
+  test: {
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    globals: true,
+    environment: 'jsdom',
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      reportsDirectory: './src/tests/coverage',
     },
   },
 });

@@ -34,6 +34,7 @@ export const NotesList: FC = () => {
       className={styles.notesList}
       style={{ width: `${resizeBorderWidth}px` }}
       ref={asideRef}
+      data-testid="notes-list"
     >
       <nav>
         <ul className={styles.notesList_listContainer} ref={ulRef}>

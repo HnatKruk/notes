@@ -19,7 +19,10 @@ export const NoteItem: FC = () => {
   }, [dispatch, getActiveNoteRequestAction, noteId]);
 
   return isNoteItemLoader ? <AppLoader customStyles={styles.loaderStyles}/> : (
-    <div className={styles.noteItem}>
+    <div
+      className={styles.noteItem}
+      data-testid='note-item'
+    >
       <NoteDate dateCreated={activeNote.dateCreated} dateEdited={activeNote.dateEdited} />
       <NoteTextarea text={activeNote.text} />
     </div>

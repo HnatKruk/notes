@@ -25,7 +25,10 @@ export const App: FC = () => {
   }, [activeNote, navigate]);
 
   return isAppLoader ? <AppLoader customStyles={styles.loaderStyles}/> : (
-    <div className={styles.app}>
+    <div
+      className={styles.app}
+      data-testid='app'
+    >
       <Header />
       <main className={styles.app_main}>
         <NotesList />

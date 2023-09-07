@@ -1,8 +1,8 @@
 import { rootInitialState } from '../../shared/initialState';
 import { ActionTypes } from '@actionTypes';
-import { NotesReducer, InterfaceActions } from '@interfaces';
+import { NotesReducerInterface, InterfaceActions } from '@interfaces';
 
-const initialState: NotesReducer = {
+const initialState: NotesReducerInterface = {
   ...rootInitialState.notesInitialState,
   isNotesLoaded: false,
 };

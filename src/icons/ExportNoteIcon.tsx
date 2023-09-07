@@ -8,6 +8,7 @@ export const ExportNoteIcon: FC<IconInterface> = ({ fill, width, height }) => (
     viewBox='0 0 48 48'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'
+    data-testid='export-note-icon'
   >
     <path
       d='M42 27C42 33 38 43 24 43C10 43 6 33 6 27'

@@ -5,16 +5,16 @@ interface NotesReducerPayloadInterface {
   notesInitialState: NotesReducerInterface,
 };
 
-interface InitializeDataRequestInterface {
+export interface InitializeDataRequestInterface {
   type: ActionTypes.INITIALIZE_DATA_REQUEST;
 };
 
-interface InitializeDataSuccessInterface {
+export interface InitializeDataSuccessInterface {
   type: ActionTypes.INITIALIZE_DATA_SUCCESS;
   payload: NotesReducerPayloadInterface;
 };
 
-interface InitializeDataFailureInterface {
+export interface InitializeDataFailureInterface {
   type: ActionTypes.INITIALIZE_DATA_FAILURE;
   payload: any;
 };
@@ -24,12 +24,12 @@ export interface GetActiveNoteRequestInterface {
   payload: string;
 };
 
-interface GetActiveNoteSuccessInterface {
+export interface GetActiveNoteSuccessInterface {
   type: ActionTypes.GET_ACTIVE_NOTE_SUCCESS;
   payload: NotesReducerInterface;
 };
 
-interface GetActiveNoteFailureInterface {
+export interface GetActiveNoteFailureInterface {
   type: ActionTypes.GET_ACTIVE_NOTE_FAILURE;
   payload: any;
 };
@@ -42,17 +42,17 @@ export interface EditTextActiveNoteRequestInterface {
   },
 };
 
-interface EditTextActiveNoteSuccessInterface {
+export interface EditTextActiveNoteSuccessInterface {
   type: ActionTypes.EDIT_TEXT_ACTIVE_NOTE_SUCCESS,
   payload: NotesReducerPayloadInterface,
 };
 
-interface EditTextActiveNoteFailureInterface {
+export interface EditTextActiveNoteFailureInterface {
   type: ActionTypes.EDIT_TEXT_ACTIVE_NOTE_FAILURE,
   payload: any,
 };
 
-interface SetResizeBorderWidthInterface {
+export interface SetResizeBorderWidthInterface {
   type: ActionTypes.SET_RESIZE_BORDER_WIDTH,
   payload: number,
 };
@@ -65,12 +65,12 @@ export interface DeleteActiveNoteRequestInterface {
   },
 };
 
-interface DeleteActiveNoteSuccessInterface {
+export interface DeleteActiveNoteSuccessInterface {
   type: ActionTypes.DELETE_ACTIVE_NOTE_SUCCESS,
   payload: NotesReducerPayloadInterface,
 };
 
-interface DeleteActiveNoteFailureInterface {
+export interface DeleteActiveNoteFailureInterface {
   type: ActionTypes.DELETE_ACTIVE_NOTE_FAILURE,
   payload: any,
 };
@@ -80,12 +80,12 @@ export interface CreateActiveNoteRequestInterface {
   payload: string,
 };
 
-interface CreateActiveNoteSuccessInterface {
+export interface CreateActiveNoteSuccessInterface {
   type: ActionTypes.CREATE_ACTIVE_NOTE_SUCCESS,
   payload: NotesReducerPayloadInterface,
 };
 
-interface CreateActiveNoteFailureInterface {
+export interface CreateActiveNoteFailureInterface {
   type: ActionTypes.CREATE_ACTIVE_NOTE_FAILURE,
   payload: any,
 };

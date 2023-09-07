@@ -32,6 +32,7 @@ export const NoteTextarea: FC<NoteTextareaProps> = ({ text }) => {
       value={textareaValue}
       onChange={handleChange}
       ref={textareaRef}
+      data-testid='note-textarea'
     />
   );
 };

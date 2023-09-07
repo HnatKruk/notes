@@ -16,7 +16,7 @@ export const Header: FC = () => {
   const isNoteItemLoader = noteItemLoader || !activeNote;
 
   const deleteActiveNote = () => {
-    const handleNavigate = () => {navigate('/', { replace: true })};
+    const handleNavigate = () => { navigate('/', { replace: true }) };
     dispatch(deleteActiveNoteRequestAction(activeNote?.id as string, handleNavigate));
   };
 
@@ -26,7 +26,10 @@ export const Header: FC = () => {
   };
 
   return (
-    <header className={styles.header}>
+    <header
+      className={styles.header}
+      data-testid='header'
+    >
       <div
         className={styles.header_leftSide}
         style={{ width: `${resizeBorderWidth}px` }}

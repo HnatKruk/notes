@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import { setResizeBorderWidthAction } from '@actions';
 import styles from './styles.module.scss';
 
-interface NoteTextareaProps {
+interface ResizeBorderProps {
   borderHeight?: number | null;
 };
 
-export const ResizeBorder: FC<NoteTextareaProps> = ({ borderHeight }) => {
+export const ResizeBorder: FC<ResizeBorderProps> = ({ borderHeight }) => {
   const dispatch = useDispatch();
   const [isResizing, setIsResizing] = useState(false);
 
@@ -33,7 +33,7 @@ export const ResizeBorder: FC<NoteTextareaProps> = ({ borderHeight }) => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isResizing]);
+  }, [dispatch, isResizing]);
 
   const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = (event) => {
     event.preventDefault();
@@ -45,6 +45,7 @@ export const ResizeBorder: FC<NoteTextareaProps> = ({ borderHeight }) => {
       className={styles.resizeBorder}
       onMouseDown={handleMouseDown}
       style={{ height: borderHeight !== null ? `${borderHeight}px` : undefined }}
+      data-testid="resize-border"
     >
       <div className={styles.resizeBorder__before} />
       <div className={styles.resizeBorder__after} />

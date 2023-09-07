@@ -20,6 +20,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    /* Testing */
+    "types": ["vitest", "@testing-library/jest-dom"],
+
     /* Aliases */
     "baseUrl": "./src",
     "paths": {

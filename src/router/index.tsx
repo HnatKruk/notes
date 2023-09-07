@@ -16,4 +16,4 @@ export const AppProvider = () => {
   ]);
 
   return <RouterProvider router={router} />;
-}
+};
