@@ -35,7 +35,6 @@ export const NoteLink: FC<NoteLinkProps> = ({ note }) => {
       to={note.routeId}
       replace={true}
       className={({ isActive }) => cx({[styles.navLink__disabled]: isActive})}
-      data-testid="note-link"
     >
       {({ isActive }) => (
         <article className={cx(styles.noteLink, {[styles.noteLink__active]: isActive})}>

@@ -26,10 +26,7 @@ export const Header: FC = () => {
   };
 
   return (
-    <header
-      className={styles.header}
-      data-testid='header'
-    >
+    <header className={styles.header}>
       <div
         className={styles.header_leftSide}
         style={{ width: `${resizeBorderWidth}px` }}

@@ -25,7 +25,6 @@ export const NoteDate: FC<NoteDateProps> = ({ dateCreated, dateEdited }) => {
     <span
       className={styles.noteDate}
       onClick={handleShowDateCreated}
-      data-testid="note-date"
     >
       {dateLabel}
     </span>

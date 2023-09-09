@@ -1,51 +1,31 @@
-import '@testing-library/jest-dom';
-import { describe, it, expect, beforeEach } from 'vitest';
-import { render } from '@testing-library/react';
-import configureStore from 'redux-mock-store';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { renderWithStore } from '../test-utils';
 import { NoteItem } from '../../pages';
 import { storeMocks } from '../__mocks__/store-mocks';
 
-const mockStore = configureStore([]);
-const store = mockStore(storeMocks);
-
-const renderComponent = () => render(
-  <Provider store={store}>
-    <Router>
-      <NoteItem />
-    </Router>
-  </Provider>
-);
-
-beforeEach(() => {
-  store.clearActions();
-});
-
 describe('NoteItem', () => {
-  it('renders AppLoader component without crashing', () => {
+  it('should renders AppLoader component without crashing', () => {
     storeMocks.viewReducer.noteItemLoader = true;
-    const { getByTestId } = renderComponent();
+    const { getByTestId } = renderWithStore(<NoteItem />);
     const appLoaderComponent = getByTestId('app-loader');
     expect(appLoaderComponent).toBeInTheDocument();
   });
 
-  it('renders NoteItem component without crashing', () => {
+  it('should renders NoteItem component without crashing', () => {
     storeMocks.viewReducer.noteItemLoader = false;
-    const { getByTestId } = renderComponent();
+    const { getByTestId } = renderWithStore(<NoteItem />);
     const appComponent = getByTestId('note-item');
     expect(appComponent).toBeInTheDocument();
   });
 
-  it('renders NoteDate component without crashing', () => {
-    const { getByTestId } = renderComponent();
-    const noteDateComponent = getByTestId('note-date');
+  it('should renders NoteDate component without crashing', () => {
+    const { container } = renderWithStore(<NoteItem />);
+    const noteDateComponent = container.querySelector('span');
     expect(noteDateComponent).toBeInTheDocument();
   });
 
-  it('renders NoteTextarea component without crashing', () => {
-    const { getByTestId } = renderComponent();
-    const noteTextareaComponent = getByTestId('note-textarea');
+  it('should renders NoteTextarea component without crashing', () => {
+    const { container } = renderWithStore(<NoteItem />);
+    const noteTextareaComponent = container.querySelector('textarea');
     expect(noteTextareaComponent).toBeInTheDocument();
   });
 });
