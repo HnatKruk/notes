@@ -22,7 +22,7 @@ export default defineConfig({
   test: {
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     globals: true,
-    setupFiles: "@testing-library/jest-dom",
+    setupFiles: ['src/tests/setupTests.ts'],
     environment: 'jsdom',
     coverage: {
       provider: 'v8',
