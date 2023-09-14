@@ -1,7 +1,9 @@
-import { FC, useState, useEffect, useRef } from 'react';
+import { FC, useState, useEffect, useRef, Fragment } from 'react';
 import { useSelector } from 'react-redux';
+import { uuid } from 'short-uuid';
 import { NoteLink, ResizeBorder } from '@components';
 import { NoteInterface, RootStateInterface } from '@interfaces';
+import { splitNotesListByDate } from './noteListSplitter';
 import styles from './styles.module.scss';
 
 export const NotesList: FC = () => {
@@ -29,6 +31,14 @@ export const NotesList: FC = () => {
     };
   }, []);
 
+  const splittedNotesListConfig = splitNotesListByDate(notesList);
+
+  const renderNoteLinks = (notesList: NoteInterface[]) => {
+    return notesList.map((note: NoteInterface) => <li key={note.id}>
+      <NoteLink note={note}/>
+    </li>);
+  };
+
   return (
     <aside
       className={styles.notesList}
@@ -37,9 +47,12 @@ export const NotesList: FC = () => {
     >
       <nav>
         <ul className={styles.notesList_listContainer} ref={ulRef}>
-          {notesList.map((note: NoteInterface) => <li key={note.id}>
-            <NoteLink note={note}/>
-          </li>)}
+          {splittedNotesListConfig.map((splittedNotesList) => splittedNotesList.notesList.length > 0 && (
+            <Fragment key={uuid()}>
+              <span className={styles.notesList__listName}>{splittedNotesList.notesListName}</span>
+              {renderNoteLinks(splittedNotesList.notesList)}
+            </Fragment>
+          ))}
         </ul>
       </nav>
       <ResizeBorder borderHeight={borderHeight} />

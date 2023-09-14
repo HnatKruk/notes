@@ -43,7 +43,7 @@ export const NoteLink: FC<NoteLinkProps> = ({ note }) => {
           </h2>
           <div className={styles.noteLink_subtitle}>
             <span className={styles.noteLink_subtitle__date}>
-              {formatDate(note.dateCreated)}
+              {formatDate(note.dateEdited)}
             </span>
             <p className={styles.noteLink_subtitle__text}>
               {subtitle || subTitlePlaceholder}

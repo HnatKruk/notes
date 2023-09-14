@@ -10,4 +10,16 @@
   .notesList_listContainer {
     padding: 10px;
   }
+
+  .notesList__listName {
+    color: $text-color-grey;
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .notesList__listName:not(:first-child) {
+    margin-top: 20px;
+  }
 }
