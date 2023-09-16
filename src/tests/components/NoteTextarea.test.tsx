@@ -1,15 +1,12 @@
-import { renderWithStore, fireEvent } from '../test-utils';
+import { render, fireEvent } from '@testing-library/react';
 import { NoteTextarea } from '@components';
+import { createProviders } from '../test-utils';
+
+const wrapper = createProviders();
 
 describe('NoteTextarea', () => {
-  it('should renders without crashing', () => {
-    const { container } = renderWithStore(<NoteTextarea text={''} />);
-    const noteTextareaComponent = container.querySelector('textarea');
-    expect(noteTextareaComponent).toBeInTheDocument();
-  });
-
   it('should changes textarea value when input value changes', () => {
-    const { container } = renderWithStore(<NoteTextarea text={'Initial text'} />);
+    const { container } = render(<NoteTextarea text={'Initial text'} />, { wrapper });
     const noteTextareaComponent = container.querySelector('textarea') as HTMLTextAreaElement;
 
     fireEvent.input(noteTextareaComponent, { target: { value: 'New text' } });

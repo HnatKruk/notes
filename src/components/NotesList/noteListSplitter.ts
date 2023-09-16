@@ -1,9 +1,11 @@
-import { isToday, parseISO, isWithinInterval, subDays } from 'date-fns';
+import { isToday, isYesterday, parseISO, isWithinInterval, subDays } from 'date-fns';
 import { NoteInterface } from '@interfaces';
 
 export const splitNotesListByDate = (notesList: NoteInterface[]) => {
-  const currentDateNotes: NoteInterface[]  = [];
+  const currentDayNotes: NoteInterface[]  = [];
+  const pastDayNotes: NoteInterface[]  = [];
   const pastWeekNotes: NoteInterface[] = [];
+  const pastMonthNotes: NoteInterface[] = [];
   const olderNotes: NoteInterface[] = [];
   const today = new Date();
 
@@ -11,9 +13,13 @@ export const splitNotesListByDate = (notesList: NoteInterface[]) => {
     const itemDate = parseISO(note.dateEdited);
 
     if (isToday(itemDate)) {
-      currentDateNotes.push(note);
+      currentDayNotes.push(note);
+    } else if (isYesterday(itemDate)) {
+      pastDayNotes.push(note);
     } else if (isWithinInterval(itemDate, { start: subDays(today, 7), end: today })) {
       pastWeekNotes.push(note);
+    } else if (isWithinInterval(itemDate, { start: subDays(today, 30), end: today })) {
+      pastMonthNotes.push(note);
     } else {
       olderNotes.push(note);
     }
@@ -22,11 +28,19 @@ export const splitNotesListByDate = (notesList: NoteInterface[]) => {
   const splittedNotesListConfig = [
     {
       notesListName: 'Today',
-      notesList: currentDateNotes,
+      notesList: currentDayNotes,
+    },
+    {
+      notesListName: 'Yesterday',
+      notesList: pastDayNotes,
     },
     {
       notesListName: 'Previous 7 Days',
       notesList: pastWeekNotes,
+    },
+    {
+      notesListName: 'Previous 30 Days',
+      notesList: pastMonthNotes,
     },
     {
       notesListName: 'Previously',

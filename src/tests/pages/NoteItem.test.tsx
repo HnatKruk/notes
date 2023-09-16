@@ -1,31 +1,29 @@
-import { renderWithStore } from '../test-utils';
+import { render } from '@testing-library/react';
 import { NoteItem } from '../../pages';
 import { storeMocks } from '../__mocks__/store-mocks';
+import { createProviders } from '../test-utils';
+
+const wrapper = createProviders();
 
 describe('NoteItem', () => {
   it('should renders AppLoader component without crashing', () => {
     storeMocks.viewReducer.noteItemLoader = true;
-    const { getByTestId } = renderWithStore(<NoteItem />);
+    const { getByTestId } = render(<NoteItem />, { wrapper });
+
     const appLoaderComponent = getByTestId('app-loader');
+
     expect(appLoaderComponent).toBeInTheDocument();
   });
 
-  it('should renders NoteItem component without crashing', () => {
+  it('should renders NoteItem, NoteDate, NoteTextarea components without crashing', () => {
     storeMocks.viewReducer.noteItemLoader = false;
-    const { getByTestId } = renderWithStore(<NoteItem />);
+    const { container, getByTestId } = render(<NoteItem />, { wrapper });
     const appComponent = getByTestId('note-item');
-    expect(appComponent).toBeInTheDocument();
-  });
-
-  it('should renders NoteDate component without crashing', () => {
-    const { container } = renderWithStore(<NoteItem />);
     const noteDateComponent = container.querySelector('span');
-    expect(noteDateComponent).toBeInTheDocument();
-  });
-
-  it('should renders NoteTextarea component without crashing', () => {
-    const { container } = renderWithStore(<NoteItem />);
     const noteTextareaComponent = container.querySelector('textarea');
+
+    expect(appComponent).toBeInTheDocument();
+    expect(noteDateComponent).toBeInTheDocument();
     expect(noteTextareaComponent).toBeInTheDocument();
   });
 });

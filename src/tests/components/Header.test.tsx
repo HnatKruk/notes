@@ -1,8 +1,11 @@
-import { renderWithStore, store, fireEvent } from '../test-utils';
+import { render, fireEvent } from '@testing-library/react';
 import { advanceTo, clear } from 'jest-date-mock';
 import { Header } from '@components';
 import { createActiveNoteRequestAction, deleteActiveNoteRequestAction } from '@/store/actions';
+import { createProviders, store } from '../test-utils';
 import { storeMocks } from '../__mocks__/store-mocks';
+
+const wrapper = createProviders();
 
 beforeEach(() => {
   store.clearActions();
@@ -24,42 +27,36 @@ afterEach(() => {
 
 describe('Header', () => {
   it('should renders without crashing', () => {
-    const { container } = renderWithStore(<Header />);
+    const { container, getByTestId } = render(<Header />, { wrapper });
     const headerComponent = container.querySelector('header');
-    expect(headerComponent).toBeInTheDocument();
-  });
-
-  it('should renders NewNoteIcon button', () => {
-    const { getByTestId } = renderWithStore(<Header />);
     const newNoteButton = getByTestId('new-note-icon');
+    const resizeBorder = getByTestId('resize-border');
+
+    expect(headerComponent).toBeInTheDocument();
     expect(newNoteButton).toBeInTheDocument();
+    expect(resizeBorder).toBeInTheDocument();
+
   });
 
   it('should dispatches createActiveNoteRequestAction when NewNoteIcon button is clicked', () => {
-    const { getByTestId } = renderWithStore(<Header />);
+    const { getByTestId } = render(<Header />, { wrapper });
     const newNoteButton = getByTestId('new-note-icon');
 
     fireEvent.click(newNoteButton);
 
     expect(store.getActions()).toEqual([
-      createActiveNoteRequestAction('2023-09-05T09:00:00.000Z')
+      createActiveNoteRequestAction(new Date().toISOString())
     ]);
   });
 
-  it('renders ResizeBorder component', () => {
-    const { getByTestId } = renderWithStore(<Header />);
-    const resizeBorder = getByTestId('resize-border');
-    expect(resizeBorder).toBeInTheDocument();
-  });
-
   it('should renders RemoveNoteIcon button when activeNote is available', () => {
-    const { getByTestId } = renderWithStore(<Header />);
+    const { getByTestId } = render(<Header />, { wrapper });
     const removeNoteButton = getByTestId('remove-note-icon');
     expect(removeNoteButton).toBeInTheDocument();
   });
 
   it('should dispatches deleteActiveNoteRequestAction when RemoveNoteIcon button is clicked', () => {
-    const { getByTestId } = renderWithStore(<Header />);
+    const { getByTestId } = render(<Header />, { wrapper });
     const removeNoteButton = getByTestId('remove-note-icon');
     const activeNote = storeMocks.notesReducer.activeNote;
 
@@ -75,14 +72,14 @@ describe('Header', () => {
 
   it('shouldn`t renders NewNoteIcon button if noteItemLoader', () => {
     storeMocks.viewReducer.noteItemLoader = true;
-    const { queryByTestId } = renderWithStore(<Header />);
+    const { queryByTestId } = render(<Header />, { wrapper });
     const newNoteButton = queryByTestId('remove-note-icon');
     expect(newNoteButton).toBeNull();
   });
 
   it('shouldn`t renders NewNoteIcon button if !activeNote', () => {
     storeMocks.notesReducer.activeNote = null;
-    const { queryByTestId } = renderWithStore(<Header />);
+    const { queryByTestId } = render(<Header />, { wrapper });
     const newNoteButton = queryByTestId('remove-note-icon');
     expect(newNoteButton).toBeNull();
   });
