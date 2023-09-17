@@ -35,7 +35,6 @@ describe('Header', () => {
     expect(headerComponent).toBeInTheDocument();
     expect(newNoteButton).toBeInTheDocument();
     expect(resizeBorder).toBeInTheDocument();
-
   });
 
   it('should dispatches createActiveNoteRequestAction when NewNoteIcon button is clicked', () => {
@@ -49,10 +48,13 @@ describe('Header', () => {
     ]);
   });
 
-  it('should renders RemoveNoteIcon button when activeNote is available', () => {
+  it('should renders buttons when activeNote is available', () => {
     const { getByTestId } = render(<Header />, { wrapper });
     const removeNoteButton = getByTestId('remove-note-icon');
+    const exportNoteButton = getByTestId('export-note-icon');
+
     expect(removeNoteButton).toBeInTheDocument();
+    expect(exportNoteButton).toBeInTheDocument();
   });
 
   it('should dispatches deleteActiveNoteRequestAction when RemoveNoteIcon button is clicked', () => {
@@ -70,17 +72,23 @@ describe('Header', () => {
     }
   });
 
-  it('shouldn`t renders NewNoteIcon button if noteItemLoader', () => {
+  it('shouldn`t renders buttons if noteItemLoader', () => {
     storeMocks.viewReducer.noteItemLoader = true;
     const { queryByTestId } = render(<Header />, { wrapper });
-    const newNoteButton = queryByTestId('remove-note-icon');
-    expect(newNoteButton).toBeNull();
+    const removeNoteButton = queryByTestId('remove-note-icon');
+    const exportNoteButton = queryByTestId('export-note-icon');
+
+    expect(removeNoteButton).toBeNull();
+    expect(exportNoteButton).toBeNull();
   });
 
-  it('shouldn`t renders NewNoteIcon button if !activeNote', () => {
+  it('shouldn`t renders buttons if !activeNote', () => {
     storeMocks.notesReducer.activeNote = null;
     const { queryByTestId } = render(<Header />, { wrapper });
-    const newNoteButton = queryByTestId('remove-note-icon');
-    expect(newNoteButton).toBeNull();
+    const removeNoteButton = queryByTestId('remove-note-icon');
+    const exportNoteButton = queryByTestId('export-note-icon');
+
+    expect(removeNoteButton).toBeNull();
+    expect(exportNoteButton).toBeNull();
   });
 });

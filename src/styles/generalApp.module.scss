@@ -4,3 +4,22 @@
 body {
   font-family: 'Montserrat', Arial, sans-serif;
 }
+
+.headerButton {
+  width: 33px;
+  height: 33px;
+  position: relative;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #dddedf;
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

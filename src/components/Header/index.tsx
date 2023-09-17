@@ -1,29 +1,27 @@
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { createActiveNoteRequestAction, deleteActiveNoteRequestAction } from '@actions';
+import { useSelector } from 'react-redux';
+import cx from 'classnames';
 import { ResizeBorder } from '@components';
-import { NewNoteIcon, RemoveNoteIcon } from '@icons';
-import { RootStateInterface } from '@interfaces';
+import { RootStateInterface } from '@/interfaces';
+import { createHeaderButtons } from './headerButtonsCreator';
+import { LEFT_SIDE, RIGHT_SIDE } from './headerConstants';
 import styles from './styles.module.scss';
 
 export const Header: FC = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { resizeBorderWidth } = useSelector((store: RootStateInterface) => store.viewReducer);
+  const headerButtonsConfig = createHeaderButtons();
 
-  const { resizeBorderWidth, noteItemLoader } = useSelector((store: RootStateInterface) => store.viewReducer);
-  const { activeNote } = useSelector((store: RootStateInterface) => store.notesReducer);
-  const isNoteItemLoader = noteItemLoader || !activeNote;
-
-  const deleteActiveNote = () => {
-    const handleNavigate = () => { navigate('/', { replace: true }) };
-    dispatch(deleteActiveNoteRequestAction(activeNote?.id as string, handleNavigate));
-  };
-
-  const createActiveNote = () => {
-    const currentDate = new Date().toISOString();
-    dispatch(createActiveNoteRequestAction(currentDate));
-  };
+  const renderHeaderButtons = (headerSide: string) => headerButtonsConfig
+    .filter((buttonConfig) => buttonConfig.side === headerSide)
+    .map((buttonConfig) => !buttonConfig.isHidden && (
+      <button
+        className={cx(styles.headerButton, buttonConfig.class)}
+        onClick={buttonConfig.onClick}
+        key={buttonConfig.key}
+      >
+        <buttonConfig.icon />
+      </button>
+    ));
 
   return (
     <header className={styles.header}>
@@ -31,23 +29,11 @@ export const Header: FC = () => {
         className={styles.header_leftSide}
         style={{ width: `${resizeBorderWidth}px` }}
       >
-        <div className={styles.header_buttonsContainer}>
-          {!isNoteItemLoader && <button
-            className={styles.headerButton}
-            onClick={deleteActiveNote}
-          >
-            <RemoveNoteIcon />
-          </button>}
-        </div>
+        {renderHeaderButtons(LEFT_SIDE)}
         <ResizeBorder />
       </div>
       <div className={styles.header_rightSide}>
-        <button
-          className={styles.headerButton}
-          onClick={createActiveNote}
-        >
-          <NewNoteIcon />
-        </button>
+        {renderHeaderButtons(RIGHT_SIDE)}
       </div>
     </header>
   );
