@@ -17,6 +17,7 @@ import {
   initializeDataRequestAction,
   initializeDataSuccessAction,
   setResizeBorderWidthAction,
+  setFilterTextAction,
 } from '@actions';
 
 describe('Redux Actions', () => {
@@ -234,6 +235,20 @@ describe('Redux Actions', () => {
     it('should have a payload with the provided data', () => {
       const action = createActiveNoteFailureAction(null);
       expect(action.payload).toEqual(null);
+    });
+  });
+
+  describe('setFilterTextAction', () => {
+    it('should create an action with the correct type', () => {
+      const resizeBorderWidth = storeMocks.notesReducer.filterText;
+      const action = setFilterTextAction(resizeBorderWidth);
+      expect(action.type).toBe(ActionTypes.SET_FILTER_TEXT);
+    });
+
+    it('should have a payload with the provided data', () => {
+      const resizeBorderWidth = storeMocks.notesReducer.filterText;
+      const action = setFilterTextAction(resizeBorderWidth);
+      expect(action.payload).toEqual(resizeBorderWidth);
     });
   });
 });
