@@ -8,6 +8,7 @@ currentDate.setHours(currentDate.getHours() - 1);
 export const rootInitialState: InitialStateInterface = {
   notesInitialState: {
     activeNote: null,
+    filterText: '',
     notesList: [
       {
         id: uuidv4(),

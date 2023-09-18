@@ -32,6 +32,8 @@ export const notesReducer = (state = initialState, action: InterfaceActions) => 
       return { ...state, ...action.payload.notesInitialState };
     case ActionTypes.CREATE_ACTIVE_NOTE_SUCCESS:
       return { ...state, ...action.payload.notesInitialState };
+    case ActionTypes.SET_FILTER_TEXT:
+      return { ...state, filterText: action.payload };
     default:
       return state;
   }

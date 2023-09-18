@@ -17,6 +17,7 @@ import {
   InitializeDataSuccessInterface,
   NotesReducerInterface,
   SetResizeBorderWidthInterface,
+  SetFilterTextInterface,
 } from '@interfaces';
 
 export const initializeDataRequestAction = (): InitializeDataRequestInterface => ({
@@ -102,4 +103,9 @@ export const createActiveNoteSuccessAction = (data: { notesInitialState: NotesRe
 export const createActiveNoteFailureAction = (error: any): CreateActiveNoteFailureInterface => ({
   type: ActionTypes.CREATE_ACTIVE_NOTE_FAILURE,
   payload: error,
+});
+
+export const setFilterTextAction = (filterText: string): SetFilterTextInterface => ({
+  type: ActionTypes.SET_FILTER_TEXT,
+  payload: filterText,
 });

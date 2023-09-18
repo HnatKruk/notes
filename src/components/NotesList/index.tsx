@@ -7,7 +7,7 @@ import { splitNotesListByDate } from './noteListSplitter';
 import styles from './styles.module.scss';
 
 export const NotesList: FC = () => {
-  const { notesList } = useSelector((store: RootStateInterface) => store.notesReducer);
+  const { notesList, filterText } = useSelector((store: RootStateInterface) => store.notesReducer);
   const { resizeBorderWidth } = useSelector((store: RootStateInterface) => store.viewReducer);
   const [borderHeight, setBorderHeight] = useState(0);
   const asideRef = useRef<HTMLElement | null>(null);
@@ -31,7 +31,14 @@ export const NotesList: FC = () => {
     };
   }, []);
 
-  const splittedNotesListConfig = splitNotesListByDate(notesList);
+  const filteredNotesList = notesList.filter((note) => {
+    const uppercaseText = note.text.toUpperCase();
+    if (uppercaseText.includes(filterText.toUpperCase())) {
+      return note;
+    }
+  });
+
+  const splittedNotesListConfig = splitNotesListByDate(filteredNotesList);
 
   const renderNoteLinks = (notesList: NoteInterface[]) => {
     return notesList.map((note: NoteInterface) => <li key={note.id}>

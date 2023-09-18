@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import cx from 'classnames';
-import { ResizeBorder } from '@components';
+import { ResizeBorder, SearchNotes } from '@components';
 import { RootStateInterface } from '@/interfaces';
 import { createHeaderButtons } from './headerButtonsCreator';
 import { LEFT_SIDE, RIGHT_SIDE } from './headerConstants';
@@ -34,6 +34,7 @@ export const Header: FC = () => {
       </div>
       <div className={styles.header_rightSide}>
         {renderHeaderButtons(RIGHT_SIDE)}
+        <SearchNotes />
       </div>
     </header>
   );

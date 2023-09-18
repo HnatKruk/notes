@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+
+.searchNotes {
+  grid-column: 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px $border-color-grey solid;
+  border-radius: 10px;
+  padding: 0 10px;
+
+  .searchNotes_input {
+    margin-left: 10px;
+    font-size: 14px;
+    color: $text-color-grey;
+
+    &::placeholder {
+      color: $text-color-grey;
+    }
+    
+    &:-ms-input-placeholder {
+      color: $text-color-grey;
+    }
+    
+    &::-ms-input-placeholder {
+      color: $text-color-grey;
+    }
+  }
+}

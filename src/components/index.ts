@@ -5,3 +5,4 @@ export { NoteLink } from './NoteLink';
 export { NoteTextarea } from './NoteTextarea';
 export { NotesList } from './NotesList';
 export { ResizeBorder } from './ResizeBorder';
+export { SearchNotes } from './SearchNotes';

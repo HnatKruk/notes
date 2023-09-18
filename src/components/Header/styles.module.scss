@@ -17,7 +17,7 @@
   .header_rightSide {
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: min-content 1fr min-content;
+    grid-template-columns: min-content 1fr min-content min-content;
     padding: 0 10px;
     flex: 1 0 auto;
   }
@@ -29,5 +29,6 @@
 
   .exportNote {
     grid-column: 3 / 4;
+    margin-right: 10px;
   }
 }

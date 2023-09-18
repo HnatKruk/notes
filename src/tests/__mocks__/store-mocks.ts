@@ -8,6 +8,7 @@ export const storeMocks: RootStateInterface = {
   },
   notesReducer: {
     isNotesLoaded: false,
+    filterText: '',
     activeNote: {
       id: '445ce4ee-5f15-44ce-9efd-f373c32f1439',
       routeId: 'oawuYBDsqBV1u9RJnjaJui',

@@ -16,7 +16,6 @@ export const createHeaderButtons = () => {
   const { activeNote } = useSelector((store: RootStateInterface) => store.notesReducer);
 
   const isNoteItemLoader = noteItemLoader || !activeNote;
-  const titlePlaceholder = 'New Note';
   const formattedText = activeNote?.text.split('\n');
 
   const deleteActiveNote = () => {
@@ -47,7 +46,7 @@ export const createHeaderButtons = () => {
 
     try {
       const buffer = await Packer.toBlob(doc);
-      saveAs(buffer, `${formattedText[0] || titlePlaceholder}.docx`);
+      saveAs(buffer, `${activeNote?.routeId}.docx`);
     } catch (error) {
       console.error("An error occurred while creating the file .docx", error);
     }

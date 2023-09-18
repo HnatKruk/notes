@@ -16,6 +16,7 @@ export interface NotesReducerInterface {
   isNotesLoaded: boolean,
   activeNote: NoteInterface | null,
   notesList: NoteInterface[],
+  filterText: string,
 };
 
 export interface RootStateInterface {
