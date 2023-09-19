@@ -11,7 +11,7 @@ export const App: FC = () => {
   const navigate = useNavigate();
 
   const { appLoader } = useSelector((store: RootStateInterface) => store.viewReducer);
-  const { isNotesLoaded, activeNote } = useSelector((store: RootStateInterface) => store.notesReducer);
+  const { isNotesLoaded, activeNote, filterText } = useSelector((store: RootStateInterface) => store.notesReducer);
   const isAppLoader = appLoader || !isNotesLoaded;
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export const App: FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (activeNote) {
+    if (activeNote && !filterText ) {
       navigate(activeNote.routeId, { replace: true });
     }
   }, [activeNote, navigate]);

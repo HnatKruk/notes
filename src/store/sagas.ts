@@ -8,6 +8,7 @@ import {
   EditTextActiveNoteRequestInterface,
   DeleteActiveNoteRequestInterface,
   CreateActiveNoteRequestInterface,
+  SetFilterTextRequestInterface,
 } from '@/interfaces';
 
 import {
@@ -16,6 +17,7 @@ import {
   editTextActiveNoteRequest,
   deleteActiveNoteRequest,
   createActiveNoteRequest,
+  setFilterTextRequest,
 } from '../api';
 
 import {
@@ -29,6 +31,8 @@ import {
   deleteActiveNoteFailureAction,
   createActiveNoteSuccessAction,
   createActiveNoteFailureAction,
+  setFilterTextSuccessAction,
+  setFilterTextFailureAction,
 } from '@actions';
 
 const call: any = Effects.call;
@@ -37,6 +41,7 @@ const put: any = Effects.put;
 const takeEvery: any = Effects.takeEvery;
 const all: any = Effects.all;
 const cancel: any = Effects.cancel;
+const takeLatest: any = Effects.takeLatest;
 
 interface ReturnedData {
   notesInitialState: NotesReducerInterface,
@@ -109,11 +114,21 @@ function* watchActiveNoteRequests() {
   });
 };
 
+function* setFilterTextSaga(action: SetFilterTextRequestInterface) {
+  try {
+    const data: ReturnedData = yield call(setFilterTextRequest, action.payload);
+    yield put(setFilterTextSuccessAction(data));
+  } catch (error) {
+    yield put(setFilterTextFailureAction(error));
+  }
+};
+
 export function* rootSaga() {
   yield all([
     takeEvery(ActionTypes.INITIALIZE_DATA_REQUEST, initializeDataSaga),
     takeEvery(ActionTypes.EDIT_TEXT_ACTIVE_NOTE_REQUEST, editTextActiveNoteSaga),
     takeEvery(ActionTypes.DELETE_ACTIVE_NOTE_REQUEST, deleteActiveNoteSaga),
+    takeLatest(ActionTypes.SET_FILTER_TEXT_REQUEST, setFilterTextSaga),
     fork(watchActiveNoteRequests),
   ]);
 };

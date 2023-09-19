@@ -76,3 +76,16 @@ export const createActiveNoteRequest = (dateCreated: string) => {
     throw error;
   }
 };
+
+mock.onGet('/set-filter-text').reply(async ({ params: { filterText } }) => {
+  const response = await myDataBase.setFilterTextEndpoint(filterText);
+  return [ 200, response ];
+});
+
+export const setFilterTextRequest = (filterText: string) => {
+  try {
+    return axios.get('/set-filter-text', { params: { filterText } }).then(response => response.data);
+  } catch (error) {
+    throw error;
+  }
+};

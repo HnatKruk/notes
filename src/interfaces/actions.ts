@@ -90,10 +90,20 @@ export interface CreateActiveNoteFailureInterface {
   payload: any,
 };
 
-export interface SetFilterTextInterface {
-  type: ActionTypes.SET_FILTER_TEXT,
+export interface SetFilterTextRequestInterface {
+  type: ActionTypes.SET_FILTER_TEXT_REQUEST,
   payload: string,
-}
+};
+
+export interface SetFilterTextSuccessInterface {
+  type: ActionTypes.SET_FILTER_TEXT_SUCCESS,
+  payload: NotesReducerPayloadInterface,
+};
+
+export interface SetFilterTextFailureInterface {
+  type: ActionTypes.SET_FILTER_TEXT_FAILURE,
+  payload: NotesReducerPayloadInterface,
+};
 
 export type InterfaceActions =
   | InitializeDataRequestInterface
@@ -112,4 +122,6 @@ export type InterfaceActions =
   | CreateActiveNoteRequestInterface
   | CreateActiveNoteSuccessInterface
   | CreateActiveNoteFailureInterface
-  | SetFilterTextInterface;
+  | SetFilterTextRequestInterface
+  | SetFilterTextSuccessInterface
+  | SetFilterTextFailureInterface;

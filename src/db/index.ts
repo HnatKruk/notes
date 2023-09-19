@@ -104,6 +104,20 @@ class DataBase {
       throw error;
     }
   };
+
+  async setFilterTextEndpoint(filterText: string) {
+    try {
+      const data: InitialStateInterface | null = await localforage.getItem(this.rootData);
+      if (data) {
+        data.notesInitialState.filterText = filterText;
+        return await localforage.setItem(this.rootData, data);
+      } else {
+        throw new Error;
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
 export const myDataBase = new DataBase();

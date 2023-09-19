@@ -27,13 +27,10 @@ export const notesReducer = (state = initialState, action: InterfaceActions) => 
     case ActionTypes.GET_ACTIVE_NOTE_FAILURE:
       return { ...state, activeNote: null };
     case ActionTypes.EDIT_TEXT_ACTIVE_NOTE_SUCCESS:
-      return { ...state, ...action.payload.notesInitialState };
     case ActionTypes.DELETE_ACTIVE_NOTE_SUCCESS:
-      return { ...state, ...action.payload.notesInitialState };
     case ActionTypes.CREATE_ACTIVE_NOTE_SUCCESS:
+    case ActionTypes.SET_FILTER_TEXT_SUCCESS:
       return { ...state, ...action.payload.notesInitialState };
-    case ActionTypes.SET_FILTER_TEXT:
-      return { ...state, filterText: action.payload };
     default:
       return state;
   }
