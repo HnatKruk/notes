@@ -105,6 +105,11 @@ export interface SetFilterTextFailureInterface {
   payload: NotesReducerPayloadInterface,
 };
 
+export interface SetSearchFocusInterface {
+  type: ActionTypes.SET_SEARCH_FOCUS,
+  payload: boolean,
+};
+
 export type InterfaceActions =
   | InitializeDataRequestInterface
   | InitializeDataSuccessInterface
@@ -124,4 +129,5 @@ export type InterfaceActions =
   | CreateActiveNoteFailureInterface
   | SetFilterTextRequestInterface
   | SetFilterTextSuccessInterface
-  | SetFilterTextFailureInterface;
+  | SetFilterTextFailureInterface
+  | SetSearchFocusInterface;

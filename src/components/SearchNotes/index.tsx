@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setFilterTextRequestAction } from '@/store/actions';
+import { setFilterTextRequestAction, setSearchFocusAction } from '@/store/actions';
 import { SearchNoteIcon } from '@/icons';
 import { RootStateInterface } from '@/interfaces';
 import styles from './styles.module.scss';
@@ -29,6 +29,9 @@ export const SearchNotes: FC = () => {
     handleSubmit(onSubmit)();
   };
 
+  const handleInputFocus = () => dispatch(setSearchFocusAction(true));
+  const handleInputBlur = () => dispatch(setSearchFocusAction(false));
+
   const onSubmit = (data: FormData) => {
     navigate('/', { replace: true });
     dispatch(setFilterTextRequestAction(data.searchValue));
@@ -46,6 +49,9 @@ export const SearchNotes: FC = () => {
         onChange={handleInputChange}
         className={styles.searchNotes_input}
         placeholder={INPUT_PLACEHOLDER}
+        autoFocus={true}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
       />
     </form>
   );

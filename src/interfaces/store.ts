@@ -2,6 +2,7 @@ export interface viewReducerInterface {
   appLoader: boolean,
   noteItemLoader: boolean,
   resizeBorderWidth: number,
+  isSearchFocus: boolean,
 };
 
 export interface NoteInterface {

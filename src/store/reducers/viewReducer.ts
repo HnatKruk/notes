@@ -5,6 +5,7 @@ const initialState: viewReducerInterface = {
   appLoader: false,
   noteItemLoader: false,
   resizeBorderWidth: 300,
+  isSearchFocus: false,
 };
 
 export const viewReducer = (state = initialState, action: InterfaceActions) => {
@@ -28,6 +29,8 @@ export const viewReducer = (state = initialState, action: InterfaceActions) => {
       return { ...state, noteItemLoader: false };
     case ActionTypes.CREATE_ACTIVE_NOTE_REQUEST:
       return { ...state, noteItemLoader: true };
+    case ActionTypes.SET_SEARCH_FOCUS:
+      return { ...state, isSearchFocus: action.payload }
     default:
       return state;
   }

@@ -19,6 +19,7 @@ import {
   SetResizeBorderWidthInterface,
   SetFilterTextRequestInterface,
   SetFilterTextSuccessInterface,
+  SetSearchFocusInterface,
 } from '@interfaces';
 
 export const initializeDataRequestAction = (): InitializeDataRequestInterface => ({
@@ -119,4 +120,9 @@ export const setFilterTextSuccessAction = (data: { notesInitialState: NotesReduc
 export const setFilterTextFailureAction = (error: any): CreateActiveNoteFailureInterface => ({
   type: ActionTypes.CREATE_ACTIVE_NOTE_FAILURE,
   payload: error,
+});
+
+export const setSearchFocusAction = (isSearchFocus: boolean): SetSearchFocusInterface => ({
+  type: ActionTypes.SET_SEARCH_FOCUS,
+  payload: isSearchFocus,
 });
