@@ -20,8 +20,10 @@ export const SearchNotes: FC = () => {
   const { register, handleSubmit, setValue } = useForm<FormData>();
 
   useEffect(() => {
-    setValue(INPUT_NAME, filterText);
-    dispatch(setFilterTextRequestAction(filterText));
+    if (filterText) {
+      setValue(INPUT_NAME, filterText);
+      dispatch(setFilterTextRequestAction(filterText));
+    }
   }, [setValue, filterText]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +51,7 @@ export const SearchNotes: FC = () => {
         onChange={handleInputChange}
         className={styles.searchNotes_input}
         placeholder={INPUT_PLACEHOLDER}
-        autoFocus={true}
+        autoFocus={!!filterText}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
       />

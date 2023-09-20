@@ -1,7 +1,8 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import { createProviders, store } from '../test-utils';
 import { SearchNotes } from '@components';
-import { setFilterTextAction } from '@/store/actions';
+import { setFilterTextRequestAction, setSearchFocusAction } from '@/store/actions';
+import { storeMocks } from '../__mocks__/store-mocks';
 
 const wrapper = createProviders();
 
@@ -39,8 +40,39 @@ describe('SearchNotes', () => {
 
     await waitFor(() => {
       expect(store.getActions()).toEqual([
-        setFilterTextAction(inputValue)
+        setFilterTextRequestAction(inputValue)
       ]);
     });
+  });
+
+  it('should dispatch setSearchFocusAction on input focus and blur', () => {
+    const { getByPlaceholderText } = render(<SearchNotes />, { wrapper });
+    const inputElement = getByPlaceholderText('Search');
+
+    fireEvent.focus(inputElement);
+
+    expect(store.getActions()).toEqual([
+      setSearchFocusAction(true)
+    ]);
+
+    fireEvent.blur(inputElement);
+
+    expect(store.getActions()).toEqual([
+      setSearchFocusAction(true),
+      setSearchFocusAction(false)
+    ]);
+  });
+
+  it('should call setValue and dispatch setFilterTextRequestAction in useEffect', () => {
+    const filterText = 'filterText'
+    storeMocks.notesReducer.filterText = filterText;
+    const { container } = render(<SearchNotes />, { wrapper });
+    const inputElement = container.querySelector('input');
+
+    expect(inputElement).toHaveValue(filterText);
+    expect(store.getActions()).toEqual([
+      setSearchFocusAction(true),
+      setFilterTextRequestAction(filterText)
+    ]);
   });
 });

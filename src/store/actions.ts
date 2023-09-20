@@ -19,6 +19,7 @@ import {
   SetResizeBorderWidthInterface,
   SetFilterTextRequestInterface,
   SetFilterTextSuccessInterface,
+  SetFilterTextFailureInterface,
   SetSearchFocusInterface,
 } from '@interfaces';
 
@@ -117,8 +118,8 @@ export const setFilterTextSuccessAction = (data: { notesInitialState: NotesReduc
   payload: data,
 });
 
-export const setFilterTextFailureAction = (error: any): CreateActiveNoteFailureInterface => ({
-  type: ActionTypes.CREATE_ACTIVE_NOTE_FAILURE,
+export const setFilterTextFailureAction = (error: any): SetFilterTextFailureInterface => ({
+  type: ActionTypes.SET_FILTER_TEXT_FAILURE,
   payload: error,
 });
 

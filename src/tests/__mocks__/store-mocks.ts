@@ -5,6 +5,7 @@ export const storeMocks: RootStateInterface = {
     appLoader: false,
     noteItemLoader: false,
     resizeBorderWidth: 300,
+    isSearchFocus: false,
   },
   notesReducer: {
     isNotesLoaded: false,

@@ -102,7 +102,7 @@ export interface SetFilterTextSuccessInterface {
 
 export interface SetFilterTextFailureInterface {
   type: ActionTypes.SET_FILTER_TEXT_FAILURE,
-  payload: NotesReducerPayloadInterface,
+  payload: any,
 };
 
 export interface SetSearchFocusInterface {
