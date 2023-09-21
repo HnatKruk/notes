@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import { setFilterTextRequestAction, setSearchFocusAction } from '@actions';
 import { SearchNoteIcon } from '@icons';
 import { RootStateInterface } from '@interfaces';
@@ -21,13 +22,15 @@ export const SearchNotes: FC = () => {
 
   useEffect(() => {
     if (filterText) {
-      setValue(INPUT_NAME, filterText);
-      dispatch(setFilterTextRequestAction(filterText));
+      const sanitizedFilterText = DOMPurify.sanitize(filterText);
+      setValue(INPUT_NAME, sanitizedFilterText);
+      dispatch(setFilterTextRequestAction(sanitizedFilterText));
     }
   }, [setValue, filterText]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(INPUT_NAME, e.target.value);
+    const sanitizedInputValue = DOMPurify.sanitize(e.target.value);
+    setValue(INPUT_NAME, sanitizedInputValue);
     handleSubmit(onSubmit)();
   };
 

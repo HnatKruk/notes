@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import DOMPurify from 'dompurify';
 import { editTextActiveNoteRequestAction } from '@actions';
 import { RootStateInterface } from '@interfaces';
 import styles from './styles.module.scss';
@@ -15,9 +16,10 @@ export const NoteTextarea: FC<NoteTextareaProps> = ({ text }) => {
   const { isSearchFocus } = useSelector((store: RootStateInterface) => store.viewReducer);
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setTextareaValue(event.target.value);
+    const sanitizedTextareaValue = DOMPurify.sanitize(event.target.value);
+    setTextareaValue(sanitizedTextareaValue);
     const currentDate = new Date().toISOString();
-    dispatch(editTextActiveNoteRequestAction(event.target.value, currentDate));
+    dispatch(editTextActiveNoteRequestAction(sanitizedTextareaValue, currentDate));
   };
 
   useEffect(() => {

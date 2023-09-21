@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { format, isToday, isThisWeek, parseISO } from 'date-fns';
 import cx from 'classnames';
+import DOMPurify from 'dompurify';
 import { NoteInterface } from '@interfaces';
 import styles from './styles.module.scss';
 
@@ -24,11 +25,12 @@ export const NoteLink: FC<NoteLinkProps> = ({ note }) => {
 
   const titlePlaceholder = 'New Note';
   const subTitlePlaceholder = 'No additional text';
-  const lineBreakIndex = note.text.indexOf('\n');
+  const sanitizedNoteText = DOMPurify.sanitize(note.text);
+  const lineBreakIndex = sanitizedNoteText.indexOf('\n');
   const hasLineBreak = lineBreakIndex !== -1;
 
-  const title = hasLineBreak ? note.text.substring(0, lineBreakIndex) : note.text;
-  const subtitle = hasLineBreak ? note.text.substring(lineBreakIndex + 1) : '';
+  const title = hasLineBreak ? sanitizedNoteText.substring(0, lineBreakIndex) : sanitizedNoteText;
+  const subtitle = hasLineBreak ? sanitizedNoteText.substring(lineBreakIndex + 1) : '';
 
   return (
     <NavLink
