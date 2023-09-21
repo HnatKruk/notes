@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import cx from 'classnames';
 import { ResizeBorder, SearchNotes } from '@components';
-import { RootStateInterface } from '@/interfaces';
+import { RootStateInterface } from '@interfaces';
 import { createHeaderButtons } from './headerButtonsCreator';
 import { LEFT_SIDE, RIGHT_SIDE } from './headerConstants';
 import styles from './styles.module.scss';

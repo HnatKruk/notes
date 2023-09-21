@@ -2,9 +2,9 @@ import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setFilterTextRequestAction, setSearchFocusAction } from '@/store/actions';
-import { SearchNoteIcon } from '@/icons';
-import { RootStateInterface } from '@/interfaces';
+import { setFilterTextRequestAction, setSearchFocusAction } from '@actions';
+import { SearchNoteIcon } from '@icons';
+import { RootStateInterface } from '@interfaces';
 import styles from './styles.module.scss';
 
 interface FormData {
@@ -57,4 +57,4 @@ export const SearchNotes: FC = () => {
       />
     </form>
   );
-}
+};

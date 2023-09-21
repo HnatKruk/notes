@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { App } from '../../pages';
-import { initializeDataRequestAction } from '@/store/actions';
+import { initializeDataRequestAction } from '@actions';
 import { storeMocks } from '../__mocks__/store-mocks';
 import { createProviders, store } from '../test-utils';
 

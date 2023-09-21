@@ -9,7 +9,7 @@ import {
   DeleteActiveNoteRequestInterface,
   CreateActiveNoteRequestInterface,
   SetFilterTextRequestInterface,
-} from '@/interfaces';
+} from '@interfaces';
 
 import {
   getActiveNoteRequest,

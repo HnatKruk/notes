@@ -1,6 +1,6 @@
 import { subDays } from 'date-fns';
 import { splitNotesListByDate } from '@/components/NotesList/noteListSplitter.ts';
-import { NoteInterface } from '@/interfaces';
+import { NoteInterface } from '@interfaces';
 
 const generateNote = (dateEdited: string) => ({
   id: '1',

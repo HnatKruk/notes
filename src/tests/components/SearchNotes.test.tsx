@@ -1,7 +1,7 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import { createProviders, store } from '../test-utils';
 import { SearchNotes } from '@components';
-import { setFilterTextRequestAction, setSearchFocusAction } from '@/store/actions';
+import { setFilterTextRequestAction, setSearchFocusAction } from '@actions';
 import { storeMocks } from '../__mocks__/store-mocks';
 
 const wrapper = createProviders();

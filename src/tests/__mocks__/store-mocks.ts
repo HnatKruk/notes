@@ -1,4 +1,4 @@
-import { RootStateInterface } from '@/interfaces';
+import { RootStateInterface } from '@interfaces';
 
 export const storeMocks: RootStateInterface = {
   viewReducer: {

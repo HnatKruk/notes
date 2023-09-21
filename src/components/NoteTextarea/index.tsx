@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editTextActiveNoteRequestAction } from '@actions';
-import { RootStateInterface } from '@/interfaces';
+import { RootStateInterface } from '@interfaces';
 import styles from './styles.module.scss';
 
 interface NoteTextareaProps {

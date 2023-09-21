@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 import { advanceTo, clear } from 'jest-date-mock';
 import { Header } from '@components';
-import { createActiveNoteRequestAction, deleteActiveNoteRequestAction } from '@/store/actions';
+import { createActiveNoteRequestAction, deleteActiveNoteRequestAction } from '@actions';
 import { createProviders, store } from '../test-utils';
 import { storeMocks } from '../__mocks__/store-mocks';
 

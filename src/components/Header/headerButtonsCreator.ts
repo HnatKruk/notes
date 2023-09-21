@@ -4,8 +4,8 @@ import { Document, Packer, Paragraph, TextRun } from "docx";
 import { saveAs } from 'file-saver';
 import { uuid } from 'short-uuid';
 import { createActiveNoteRequestAction, deleteActiveNoteRequestAction } from '@actions';
-import { NewNoteIcon, RemoveNoteIcon, ExportNoteIcon } from "@/icons";
-import { RootStateInterface } from '@/interfaces';
+import { NewNoteIcon, RemoveNoteIcon, ExportNoteIcon } from "@icons";
+import { RootStateInterface } from '@interfaces';
 import { LEFT_SIDE, RIGHT_SIDE } from './headerConstants';
 import styles from './styles.module.scss';
 
