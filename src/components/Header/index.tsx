@@ -9,6 +9,7 @@ import styles from './styles.module.scss';
 
 export const Header: FC = () => {
   const { resizeBorderWidth } = useSelector((store: RootStateInterface) => store.viewReducer);
+  // TODO: const headerButtonsConfig = useHeaderButtons(); - it's a hook
   const headerButtonsConfig = createHeaderButtons();
 
   const renderHeaderButtons = (headerSide: string) => headerButtonsConfig
