@@ -21,14 +21,4 @@
     padding: 0 10px;
     flex: 1 0 auto;
   }
-
-  .removeNote {
-    align-self: center;
-    justify-self: end;
-  }
-
-  .exportNote {
-    grid-column: 3 / 4;
-    margin-right: 10px;
-  }
 }
