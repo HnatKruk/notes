@@ -12,7 +12,7 @@ export const Header: FC = () => {
 
   const renderHeaderButtons = (buttonsConfig: HeaderButtonConfigInterface[]) => buttonsConfig
     .filter((buttonConfig) => !buttonConfig.isHidden)
-    .map(({  class: buttonClass, Icon, ...buttonProps }) => (
+    .map(({ isHidden, class: buttonClass, Icon, ...buttonProps }) => (
       <button
         className={cx(styles.headerButton, buttonClass)}
         {...buttonProps}

@@ -1,9 +1,10 @@
-import { rootInitialState } from '../../shared/initialState';
 import { ActionTypes } from '@actionTypes';
 import { NotesReducerInterface, InterfaceActions } from '@interfaces';
 
 const initialState: NotesReducerInterface = {
-  ...rootInitialState.notesInitialState,
+  activeNote: null,
+  filterText: '',
+  notesList: [],
   isNotesLoaded: false,
 };
 
