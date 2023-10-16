@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 interface ResizeBorderProps {
   borderHeight?: number | null;
-};
+}
 
 export const ResizeBorder: FC<ResizeBorderProps> = ({ borderHeight }) => {
   const dispatch = useDispatch();

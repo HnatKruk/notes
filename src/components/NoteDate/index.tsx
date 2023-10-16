@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 interface NoteDateProps {
   dateCreated: string;
   dateEdited: string;
-};
+}
 
 export const NoteDate: FC<NoteDateProps> = ({ dateCreated, dateEdited }) => {
   const [showDateCreated, setShowDateCreated] = useState<boolean | null>(null);

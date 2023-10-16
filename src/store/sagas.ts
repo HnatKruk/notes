@@ -45,7 +45,7 @@ const takeLatest: any = Effects.takeLatest;
 
 interface ReturnedData {
   notesInitialState: NotesReducerInterface,
-};
+}
 
 function* initializeDataSaga() {
   try {
@@ -54,7 +54,7 @@ function* initializeDataSaga() {
   } catch (error) {
     yield put(initializeDataFailureAction(error));
   }
-};
+}
 
 function* getActiveNoteSaga(action: GetActiveNoteRequestInterface) {
   try {
@@ -63,7 +63,7 @@ function* getActiveNoteSaga(action: GetActiveNoteRequestInterface) {
   } catch (error) {
     yield put(getActiveNoteFailureAction(error));
   }
-};
+}
 
 function* editTextActiveNoteSaga(action: EditTextActiveNoteRequestInterface) {
   try {
@@ -72,7 +72,7 @@ function* editTextActiveNoteSaga(action: EditTextActiveNoteRequestInterface) {
   } catch (error) {
     yield put(editTextActiveNoteFailureAction(error));
   }
-};
+}
 
 function* deleteActiveNoteSaga(action: DeleteActiveNoteRequestInterface) {
   try {
@@ -83,7 +83,7 @@ function* deleteActiveNoteSaga(action: DeleteActiveNoteRequestInterface) {
   } finally {
     action.payload.callback();
   }
-};
+}
 
 function* createActiveNoteSaga(action: CreateActiveNoteRequestInterface) {
   try {
@@ -92,7 +92,7 @@ function* createActiveNoteSaga(action: CreateActiveNoteRequestInterface) {
   } catch (error) {
     yield put(createActiveNoteFailureAction(error));
   }
-};
+}
 
 function* watchActiveNoteRequests() {
   let currentTask: Task<any>;
@@ -112,7 +112,7 @@ function* watchActiveNoteRequests() {
 
     currentTask = yield fork(createActiveNoteSaga, action);
   });
-};
+}
 
 function* setFilterTextSaga(action: SetFilterTextRequestInterface) {
   try {
@@ -121,7 +121,7 @@ function* setFilterTextSaga(action: SetFilterTextRequestInterface) {
   } catch (error) {
     yield put(setFilterTextFailureAction(error));
   }
-};
+}
 
 export function* rootSaga() {
   yield all([
@@ -131,4 +131,4 @@ export function* rootSaga() {
     takeLatest(ActionTypes.SET_FILTER_TEXT_REQUEST, setFilterTextSaga),
     fork(watchActiveNoteRequests),
   ]);
-};
+}

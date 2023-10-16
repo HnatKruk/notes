@@ -16,7 +16,7 @@ export const NoteItem: FC = () => {
 
   useEffect(() => {
     dispatch(getActiveNoteRequestAction(noteId as string));
-  }, [dispatch, getActiveNoteRequestAction, noteId]);
+  }, [dispatch, noteId]);
 
   return isNoteItemLoader ? <AppLoader customStyles={styles.loaderStyles}/> : (
     <div

@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 
 interface AppLoaderProps {
   customStyles?: string;
-};
+}
 
 export const AppLoader: FC<AppLoaderProps> = ({ customStyles }) => (
   <div

@@ -27,7 +27,7 @@ describe('Redux Actions', () => {
   describe('initializeDataRequestAction', () => {
     it('should create an action with the correct type and with the provided data', () => {
       const action = initializeDataRequestAction();
-      const { type, ...rest } = action;
+      const { ...rest } = action;
       expect(action.type).toBe(ActionTypes.INITIALIZE_DATA_REQUEST);
       expect(Object.keys(rest)).toHaveLength(0);
     });
