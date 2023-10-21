@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import styles from './styles.module.scss';
 
@@ -10,8 +10,8 @@ interface NoteDateProps {
 export const NoteDate: FC<NoteDateProps> = ({ dateCreated, dateEdited }) => {
   const [showDateCreated, setShowDateCreated] = useState<boolean | null>(null);
 
-  const formattedDateCreated = format(parseISO(dateCreated), 'dd MMM yyyy, HH:mm a');
-  const formattedDateEdited = format(parseISO(dateEdited), 'dd MMM yyyy, HH:mm a');
+  const formattedDateCreated = useMemo(() => format(parseISO(dateCreated), 'dd MMM yyyy, HH:mm a'), [dateCreated]);
+  const formattedDateEdited = useMemo(() => format(parseISO(dateEdited), 'dd MMM yyyy, HH:mm a'), [dateEdited]);
 
   const dateLabel = showDateCreated ? `Created: ${formattedDateCreated}` : (
     showDateCreated === false ? `Edited: ${formattedDateEdited}` : formattedDateEdited

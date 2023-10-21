@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { format, isToday, isThisWeek, parseISO } from 'date-fns';
 import cx from 'classnames';
@@ -10,7 +10,10 @@ interface NoteLinkProps {
   note: NoteInterface;
 }
 
-export const NoteLink: FC<NoteLinkProps> = ({ note }) => {
+const titlePlaceholder = 'New Note';
+const subTitlePlaceholder = 'No additional text';
+
+export const NoteLink: FC<NoteLinkProps> = memo(({ note }) => {
   const formatDate = (date: string) => {
     const parsedDate = parseISO(date);
 
@@ -23,8 +26,6 @@ export const NoteLink: FC<NoteLinkProps> = ({ note }) => {
     }
   };
 
-  const titlePlaceholder = 'New Note';
-  const subTitlePlaceholder = 'No additional text';
   const sanitizedNoteText = DOMPurify.sanitize(note.text, { USE_PROFILES: { html: false } });
   const lineBreakIndex = sanitizedNoteText.indexOf('\n');
   const hasLineBreak = lineBreakIndex !== -1;
@@ -55,4 +56,4 @@ export const NoteLink: FC<NoteLinkProps> = ({ note }) => {
       )}
     </NavLink>
   );
-};
+});

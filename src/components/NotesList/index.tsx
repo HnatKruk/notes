@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useRef, Fragment } from 'react';
+import { FC, useState, useEffect, useRef, Fragment, useMemo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { uuid } from 'short-uuid';
 import { NoteLink, ResizeBorder } from '@components';
@@ -13,16 +13,16 @@ export const NotesList: FC = () => {
   const asideRef = useRef<HTMLElement | null>(null);
   const ulRef = useRef<HTMLUListElement | null>(null);
 
-  useEffect(() => {
-    const compareHeights = () => {
-      if (asideRef.current && ulRef.current) {
-        const asideHeight = asideRef.current.getBoundingClientRect().height;
-        const ulHeight = ulRef.current.getBoundingClientRect().height;
+  const compareHeights = useCallback(() => {
+    if (asideRef.current && ulRef.current) {
+      const asideHeight = asideRef.current.getBoundingClientRect().height;
+      const ulHeight = ulRef.current.getBoundingClientRect().height;
   
-        setBorderHeight(Math.max(asideHeight, ulHeight));
-      }
-    };
+      setBorderHeight(Math.max(asideHeight, ulHeight));
+    }
+  }, [setBorderHeight]);
 
+  useEffect(() => {
     compareHeights();
     window.addEventListener('resize', compareHeights);
 
@@ -31,12 +31,14 @@ export const NotesList: FC = () => {
     };
   }, []);
 
-  const filteredNotesList = notesList.filter((note) => {
-    const uppercaseText = note.text.toUpperCase();
-    if (uppercaseText.includes(filterText.toUpperCase())) {
-      return note;
-    }
-  });
+  const filteredNotesList = useMemo(() => {
+    return notesList.filter((note) => {
+      const uppercaseText = note.text.toUpperCase();
+      if (uppercaseText.includes(filterText.toUpperCase())) {
+        return note;
+      }
+    });
+  }, [notesList, filterText]);
 
   const splittedNotesListConfig = splitNotesListByDate(filteredNotesList);
 
