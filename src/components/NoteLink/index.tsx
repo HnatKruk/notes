@@ -25,7 +25,7 @@ export const NoteLink: FC<NoteLinkProps> = ({ note }) => {
 
   const titlePlaceholder = 'New Note';
   const subTitlePlaceholder = 'No additional text';
-  const sanitizedNoteText = DOMPurify.sanitize(note.text);
+  const sanitizedNoteText = DOMPurify.sanitize(note.text, { USE_PROFILES: { html: false } });
   const lineBreakIndex = sanitizedNoteText.indexOf('\n');
   const hasLineBreak = lineBreakIndex !== -1;
 
