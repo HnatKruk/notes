@@ -5,5 +5,5 @@ export interface InitialStateInterface {
     activeNote: NoteInterface | null,
     notesList: NoteInterface[],
     filterText: string,
-  };
-};
+  },
+}

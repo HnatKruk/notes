@@ -22,7 +22,7 @@ export const App: FC = () => {
     if (activeNote && !filterText ) {
       navigate(activeNote.routeId, { replace: true });
     }
-  }, [activeNote, navigate]);
+  }, [activeNote, navigate, filterText]);
 
   return isAppLoader ? <AppLoader customStyles={styles.loaderStyles}/> : (
     <div

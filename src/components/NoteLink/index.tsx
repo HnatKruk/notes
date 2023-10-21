@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 
 interface NoteLinkProps {
   note: NoteInterface;
-};
+}
 
 export const NoteLink: FC<NoteLinkProps> = ({ note }) => {
   const formatDate = (date: string) => {

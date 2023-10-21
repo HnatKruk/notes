@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 
 interface NoteTextareaProps {
   text: string;
-};
+}
 
 export const NoteTextarea: FC<NoteTextareaProps> = ({ text }) => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export const NoteTextarea: FC<NoteTextareaProps> = ({ text }) => {
       textarea.focus();
       textarea.setSelectionRange(textarea.value.length, textarea.value.length);
     }
-  }, []);
+  }, [isSearchFocus]);
 
   return (
     <textarea

@@ -7,4 +7,4 @@ export interface HeaderButtonConfigInterface {
   isHidden: boolean,
   key: string,
   class?: string,
-};
+}

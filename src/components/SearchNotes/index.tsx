@@ -10,7 +10,7 @@ import styles from './styles.module.scss';
 
 interface FormData {
   searchValue: string;
-};
+}
 
 export const SearchNotes: FC = () => {
   const INPUT_PLACEHOLDER = 'Search';
@@ -26,7 +26,7 @@ export const SearchNotes: FC = () => {
       setValue(INPUT_NAME, sanitizedFilterText);
       dispatch(setFilterTextRequestAction(sanitizedFilterText));
     }
-  }, [setValue, filterText]);
+  }, [dispatch, setValue, filterText]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const sanitizedInputValue = DOMPurify.sanitize(e.target.value);
