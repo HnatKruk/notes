@@ -29,7 +29,7 @@ describe('Redux Actions', () => {
       const action = initializeDataRequestAction();
       const { ...rest } = action;
       expect(action.type).toBe(ActionTypes.INITIALIZE_DATA_REQUEST);
-      expect(Object.keys(rest)).toHaveLength(0);
+      expect(Object.keys(rest)).toHaveLength(1);
     });
   });
 
