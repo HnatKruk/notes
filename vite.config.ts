@@ -7,6 +7,9 @@ dotenv.config();
 export default defineConfig({
   base: '/notes/',
   plugins: [react()],
+  build: {
+    outDir: 'dist',
+  },
   server: {
     port: Number(process.env.PORT) || 4000,
   },
