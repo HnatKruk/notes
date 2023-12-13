@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default defineConfig({
+  base: '/notes/',
   plugins: [react()],
   server: {
     port: Number(process.env.PORT) || 4000,
