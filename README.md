@@ -3,7 +3,7 @@ NOTES is my personal pet project designed to practice, improve and demonstrate m
 The main goal of this project is to improve and develop skills in web development and gain experience using many different technologies. Using state managers, connecting and configuring tests, and using new development approaches gave me a lot of experience and knowledge.
 I believe that every stage of this project contributes to my professional growth, and I am open to feedback and improvements. This is another step towards development and self-improvement.
 
-The project is also available online. You can check it out at this link: <a href="https://hnatkruk.github.io/notes/" target="_blank">NOTES</a>
+Unfortunately I haven't been able to deploy it, but I can demo it on my local computer if needed. I am also open to help if you know how to deploy this stack
 
 ## Technologies
 - HTML
