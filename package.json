@@ -12,7 +12,7 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "vercel --prod"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
