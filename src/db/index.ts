@@ -19,6 +19,14 @@ class DataBase {
       const data = await this._getData();
       if (data) {
         return data;
+      } else {
+        this._setData({
+          notesInitialState: {
+            activeNote: null,
+            filterText: '',
+            notesList: [],
+          }
+        })
       }
     } catch (error) {
       throw error;

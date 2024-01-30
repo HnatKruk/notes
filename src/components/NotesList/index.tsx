@@ -1,10 +1,11 @@
 import { FC, useState, useEffect, useRef, Fragment, useMemo, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { uuid } from 'short-uuid';
 import { NoteLink, ResizeBorder } from '@components';
 import { NoteInterface, RootStateInterface } from '@interfaces';
 import { splitNotesListByDate } from './noteListSplitter';
 import styles from './styles.module.scss';
+import { createActiveNoteRequestAction } from '@/store/actions';
 
 export const NotesList: FC = () => {
   const { notesList, filterText } = useSelector((store: RootStateInterface) => store.notesReducer);
@@ -12,6 +13,7 @@ export const NotesList: FC = () => {
   const [borderHeight, setBorderHeight] = useState(0);
   const asideRef = useRef<HTMLElement | null>(null);
   const ulRef = useRef<HTMLUListElement | null>(null);
+  const dispatch = useDispatch();
 
   const compareHeights = useCallback(() => {
     if (asideRef.current && ulRef.current) {
@@ -21,6 +23,13 @@ export const NotesList: FC = () => {
       setBorderHeight(Math.max(asideHeight, ulHeight));
     }
   }, [setBorderHeight]);
+
+  useEffect(() => {
+    if (notesList.length === 0) {
+      const currentDate = new Date().toISOString();
+      dispatch(createActiveNoteRequestAction(currentDate));
+    }
+  }, [notesList])
 
   useEffect(() => {
     compareHeights();
